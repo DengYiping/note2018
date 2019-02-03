@@ -1,0 +1,233 @@
+#+SETUPFILE: ~/.emacs.d/org-template/doc.setup
+* Info
+course website: https://grader.eecs.jacobs-university.de/courses/320241/2018_2/ \\
+office hours: Mondays 10:00 - 12:00 \\
+there are two TAs, they will hold tutorials. \\
+** books:
+- digital systems
+- computer organization and design
+- Compilers: Principles, Techniques, and Tools(Dragon book)
+- Compiler Design in C
+** goals:
+understand the basic knowledge of:
+- computer architecture
+- data representation
+- instruction set architectures
+- datapath and control
+  + why are logic gate important, how to optimize
+- programming languages characteristics
+- phases of compilation
+** grading scheme:
+- 30% homework(in total 12)
+- 30% midterm
+- 40% final
+** homework:
+- individual submission
+- homework should be submitted in a single pdf, need a [[https://grader.eecs.jacobs-university.de/courses/320241/2018_2/lectures/template_hw.tex][homework template]]
+- homework is due on Tuesday 14:00 sharp
+*** grading criteria
+- 10% homeowork formatting
+- 50- 70% intermediate steps
+** tutorials:
+- Sundays in West Hall 4 at 17:00
+* Introduction
+** history
+1. mechanical machines
+2. electronic mchines
+3. digital computers
+4. networking
+** processor
+- Pentium I: 60MHz, 800 nm
+- Nehalem: 45 nm
+- Gulfdown: 32 nm
+** numerical representation and numerical system
+*** analog v. digital
+physical systems use quantities which must be manipulated
+arithmetically. Quantities may be represented numerically in either analog or
+digital form.
+- analog: a continuous variable, proportional indicator
+- digital: varies in discrete step
+#+CAPTION: Digital v. Analog
+| Digital                             | Analog                |
+|-------------------------------------+-----------------------|
+| discrete steps                      | a continuous variable |
+| ease of design                      |                       |
+| well suited for storing information |                       |
+| accurate and easy to maintain       |                       |
+| programmable operation              |                       |
+| less affected by noise              |                       |
+| ease of fabrication                 |                       |
+*** digital number systems
+- decimal systems
+  + 10 symbols: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+  + each number is a digit
+  + most significant digit (MSD) and least significant digit (LSD)
+  + Positional value may be stated as a digit multiplied by a power of 10
+- binary systems
+  + lends itselfs to electronic circuit design
+  + can convert to other representation
+  + Positional value may be stated as a digit multiplied by a power of 2
+*** digital circuit v. logic circuit
+- Digital circuits – produce and respond to predefined voltage ranges
+- Logic circuits – used interchangeably with the term, digital circuits
+- Digital integrated circuits (ICs) – provide logic operations in a small reliable package
+*** parallel v. serial
+- Parallel transmission – all bits in a binary number are transmitted simultaneously. A separate line is required for each bit
+- Serial transmission – each bit in a binary number is transmitted per some time interval
+- Both methods have useful applications which will be seen in later chapters
+*** memory
+- A circuit which retains a response to a momentary input is displaying memory
+- Memory is important because it provides a way to store binary numbers temporarily or permanently
+- Memory elements include:
+  + Magnetic
+  + Optical
+  + Electronic latching circuits
+* Digital system
+** Conversion
+*** Binary system
+**** Binary to decimal conversion
+  Just simply raise 2 to the corresponding power and time the digit from right to the left
+**** Decimal to binary conversion
+  Repeated integer division. We continuously divide the number by 2, note down all the reminder, and then reverse the order
+*** Hexadecimal Number system
+ - base 16, 16 possible symbols, 0 - 9 and A - F
+ - uses groups of 4 bits
+ - allows for convenient handling of long binary strings
+**** hexadecimal to decimal
+ 163_{16} = 1 * (16^2) + 6 * (16^1) + 3 * (16^0)
+**** decimal to hexadecimal
+ still using repeated integer division
+**** hexadecimal to binary
+ use the conversion table
+**** binary to hexadecimal
+ note that we group 4 bits from the right, fill in 0 on the left side if the number of digits are not divisiable by 4
+*** Binary-coded decimal(BCD)
+ - each decimal digits are converted to binary accordingly.
+ - Programmable calculators manufactured by Texas Instruments.
+ - it is not a number system
+*** Bytes, Nibbles and Words
+ - 1 byte = 8 bits
+ - 1 nibble = 4 bits
+ - 1 word = depending on a data bus width
+   - x86: 32 bits
+   - arm64: 64bits
+*** ASCII code
+ - 0 - 127
+** Logic Functions
+*** boolean constants and variables
+- Boolean algebra allows only value 0 and 1
+- Logic 0 can be: false / off / low / open switch
+- Logic 1 can be: true / on / high / close switch
+- three basic logic operators:
+  - OR
+  - AND
+  - NOT
+*** to generate truth table
+#+BEGIN_SRC python :results output
+from itertools import zip_longest as izip, product, tee
+
+# Logic functions: take and return iterators of truth values
+
+def AND(a, b):
+    for p, q in izip(a, b):
+        yield p and q
+
+def OR(a, b):
+    for p, q in izip(a, b):
+        yield p or q
+
+def NOT(a):
+    for p in a:
+        yield not p
+
+def EQUIV(a, b):
+    for p, q in izip(a, b):
+        yield p is q
+
+def IMPLIES(a, b):
+    for p, q in izip(a, b):
+        yield (not p) or q
+def XOR(a, b):
+    for p, q in izip(a, b):
+        yield p != q
+def create(num=2):
+    ''' Returns a list of all of the possible combinations of truth for the given number of variables.
+    ex. [(T, T), (T, F), (F, T), (F, F)] for two variables '''
+    return list(product([True, False], repeat=num))
+
+def unpack(data):
+    ''' Regroups the list returned by create() by variable, making it suitable for use in the logic functions.
+    ex. [(T, T, F, F), (T, F, T, F)] for two variables '''
+    return [[elem[i] for elem in lst] for i, lst in enumerate(tee(data, len(data[0])))]
+
+def print_result(data, result):
+    ''' Prints the combinations returned by create() and the results returned by the logic functions in a nice format. '''
+    n = len(data[0])
+    headers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[:n]
+    begin_format = '|'.join(n * 'c')
+    begin_str = '\\begin{tabular}{|' + begin_format + '|c|}'
+    print(begin_str)
+    print('\\hline')
+    print(' & '.join(headers) + ' & Result \\\\')
+    print('\\hline')
+    for row, result_cell in izip(data, result):
+        print(' & '.join({True: 'T', False:'F'}[cell] for cell in row) + ' &' + ' ' + {True: 'T', False:'F'}[result_cell] + ' \\\\')
+    print('\\hline')
+    print('\\end{tabular}')
+data = create(num=3)
+A, B, C = unpack(data)
+result = XOR(NOT(OR(AND(A, B), C)), AND(NOT(A), OR(B, C)))
+print_result(data, result)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+\begin{tabular}{|c|c|c|c|}
+\hline
+A & B & C & Result \\
+\hline
+T & T & T & F \\
+T & T & F & F \\
+T & F & T & F \\
+T & F & F & T \\
+F & T & T & T \\
+F & T & F & F \\
+F & F & T & T \\
+F & F & F & T \\
+\hline
+\end{tabular}
+#+end_example
+
+#+end_example
+** Logic Circuits
+*** Minimization of Logic Expression: rules
+- $w(y + z) = wy + wz$   (distributive rule)
+- $w + \overline{w} = 1$  (identity)
+- $w\overline{w} = 0$
+- $w + w = w$
+- $ww = w$
+- $w + wy = w$
+- $(w + y)(w + z) = w + yz$
+- $\overline{w + y} = \overline{w} \cdot \overline{y}$ (de Morgan)
+*** Rules to minimize logic expression
+- using Karnaugh-Maps
+- the label has to be gray code sequence
+- the edge can be combined with the other edge
+** Flip-flops
+[[./note_pics/types-of-flip-flops.jpeg]]
+* Addition in digital circuits
+** Representation of Integer
+*** Sign Magnitude
+The leading bit is the sign, and the remaining bit represent the magnitude of the number.
+
+Problem: it has two zeros +0 and -0.
+*** One's Complement
+The complement of a number can be obtained by directly flip all the bits.
+
+Problem: it has two zeros +0 and -0
+
+*** Two's Complement
+The complement of a number can be obtained by flip all the bits and add 1 to it.
+
+Advantage: addition is simple(between positive and negative numbers). Leading bit indicates the sign.
+** 

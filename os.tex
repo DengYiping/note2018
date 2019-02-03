@@ -1,0 +1,640 @@
+% Created 2018-09-13 Thu 17:29
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Yiping Deng}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={Yiping Deng},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.1.14)}, 
+ pdflang={'en'}}
+\begin{document}
+
+\tableofcontents
+
+\section{Info}
+\label{sec:org90fee3a}
+\begin{itemize}
+\item course website: \href{https://cnds.jacobs-university.de/courses/os-2018/}{website}
+\item slides: \href{./os\_slides.pdf\#20}{slides}
+\item notes: \href{./os\_notes.pdf}{notes}
+\end{itemize}
+\subsection{grading scheme}
+\label{sec:orgea74e9c}
+\begin{itemize}
+\item final exam 40\%
+\item quizzes 30\%
+\begin{itemize}
+\item 6 quizzes, with 10 pts each
+\end{itemize}
+\item assignment 30\%
+\end{itemize}
+\section{Tools}
+\label{sec:org6bfe085}
+\begin{itemize}
+\item ltrace: to trace the library call
+\item strace: to trace the system call
+\item ldd: to show the library used in the programs
+\item insmod: to insert program into the kernel
+\item /dev/null: abandon output
+\item /dev/full: cannot write
+\item /dev/random: random file
+\item pmap: to show the memory information for a specific program
+\end{itemize}
+\section{Intro}
+\label{sec:org0fb52e5}
+\subsection{system call v. library call}
+\label{sec:org5270b76}
+\begin{itemize}
+\item system call is expensive
+\end{itemize}
+\subsection{requirement of OS}
+\label{sec:org07bc1a0}
+\begin{itemize}
+\item An operating system should manage resources in a way that avoids shortages or overload conditions
+\item An operating system should be efficient and introduce little overhead
+\item An operating system should be robust against malfunctioning application
+\end{itemize}
+programs
+\begin{itemize}
+\item Data and programs should be protected against unauthorized access and hardware failures
+\end{itemize}
+\subsection{services for application}
+\label{sec:org9a255c1}
+\begin{itemize}
+\item Loading of programs
+\item Execution of programs (management of processes)
+\item High-level input/output operations
+\item Logical file systems (open(), write(), \ldots{})
+\item Control of peripheral devices
+\item Interprocess communication primitives
+\item Support of basic communication protocols
+\item Checkpoint and restart primitives
+\item \ldots{}
+\end{itemize}
+\subsection{services for system operations}
+\label{sec:orgb5bea22}
+\begin{itemize}
+\item User identification and authentication
+\item Access control mechanisms
+\item Support for cryptographic operations and the management of keys - Control functions (e.g., forced abort of processes)
+\item Testing and repair functions (e.g., file systems checks)
+\item Monitoring functions (observation of system behavior)
+\item Logging functions (collection of event logs)
+\item Accounting functions (collection of usage statistics)
+\begin{itemize}
+\item useful for cloud application
+\end{itemize}
+\item System generation and system backup functions
+\item Software management functions
+\item \ldots{}
+\end{itemize}
+\subsection{to trace the library call}
+\label{sec:orgf8dfd69}
+`ltrace`
+\begin{itemize}
+\item our hello worlds appers to use `putc`, it is done in the compile time
+\end{itemize}
+\subsection{to trace the system call}
+\label{sec:org63f0631}
+`strace`
+\begin{itemize}
+\item it produces write(1, "hello, world")
+\end{itemize}
+\subsection{to show library used in the problem}
+\label{sec:org506a7ff}
+`ldd`
+\begin{itemize}
+\item if you use compiler flag -static, it will produces a bigger executable.
+\end{itemize}
+\subsection{printf v. write}
+\label{sec:orgc7d84be}
+\begin{itemize}
+\item use printf, it is buffered. Using the buffer we can reduce the \# of system call.
+\end{itemize}
+\subsection{return value of the main function}
+\label{sec:org4a3ace2}
+Should be 0 if success, other for failure
+\subsection{what happened in the hello world program}
+\label{sec:orgf1538b5}
+\begin{itemize}
+\item c library: `printf()`, `puts()`, `fflush(), all this function will make a system call `write()`
+\begin{itemize}
+\item \textbf{user mode}
+\end{itemize}
+\item OS kernel: sys\(_{\text{write}}\)()
+\begin{itemize}
+\item \textbf{kernel mode} \footnote{crossing the boundry between user mode and kernel mode is expensive}
+\item in the kernel, there is a table indexed by the system call number
+\end{itemize}
+\end{itemize}
+\subsection{kernel space}
+\label{sec:orgb3cba28}
+\begin{itemize}
+\item the equivalent of `printf` is `printk`
+\item running program in the keneral is different from running program in the user space
+\item to push a module into the kernel, use `sudo insmod hello/hello.ko`
+\item kernel have the highest priviledge, running on Ring 0
+\end{itemize}
+\subsection{types of operating system}
+\label{sec:orgcd7345a}
+\subsubsection{Batch Processing Operating Systems}
+\label{sec:org5b391ae}
+\begin{itemize}
+\item Characteristics:
+\begin{itemize}
+\item Batch jobs are processed sequentially from a job queue
+\item Job inputs and outputs are saved in files or printed
+\item No interaction with the user during the execution of a batch program
+\end{itemize}
+\item Batch processing operating systems were the early form of operating systems.
+\item Batch processing functions still exist today, for example to execute jobs on super computers.
+\end{itemize}
+\subsubsection{General Purpose Operating Systems}
+\label{sec:org32b8cd9}
+\begin{itemize}
+\item Characteristics:
+\begin{itemize}
+\item Multiple programs execute simultaneously (multi-programming, multi-tasking)
+\item Multiple users can use the system simultaneously (multi-user)
+\item Processor time is shared between the running processes (time-sharing)
+\item Input/output devices operate concurrently with the processors
+\item Network support but no or very limited transparency
+\end{itemize}
+\item Examples:
+\begin{itemize}
+\item Linux, BSD, Solaris
+\item Windows, MacOS
+\end{itemize}
+\end{itemize}
+\subsubsection{Parallel Operating Systems}
+\label{sec:orgc003bfb}
+\begin{itemize}
+\item Characteristics:
+\begin{itemize}
+\item Support for a very large number of tightly integrated processors(1000s)
+\item Symmetrical: Each processor has a full copy of the operating system
+\item Asymmetrical: Only one processor carries the full operating system, Other processors are operated by a small operating system stub to transfer code and tasks
+\end{itemize}
+\item Massively parallel systems are a niche market and hence parallel operating systems are usually very specific to the hardware design and application area.
+\end{itemize}
+\subsubsection{Distributed Operating Systems}
+\label{sec:org4ce5a5a}
+\begin{itemize}
+\item Characteristics:
+\begin{itemize}
+\item Support for a medium number of loosely coupled processors
+\item Processors execute a small operating system kernel providing essential communication services
+\item Other operating system services are distributed over available processors
+\item Services can be replicated in order to improve scalability and availability
+\item Distribution of tasks and data transparent to users (single system image)
+\end{itemize}
+\item Examples:
+\begin{itemize}
+\item Amoeba (Vrije Universiteit Amsterdam)
+\item Plan 9 (Bell Labs, AT\&T)
+\end{itemize}
+\end{itemize}
+\subsubsection{Real-time Operating Systems}
+\label{sec:org0e4d392}
+\begin{itemize}
+\item Characteristics:
+\begin{itemize}
+\item Predictability
+\item Logical correctness of the offered services
+\item Timeliness of the offered services
+\item Services are to be delivered not too early, not too late
+\item Operating system executes processes to meet time constraints
+\end{itemize}
+\item Examples:
+\begin{itemize}
+\item QNX
+\item VxWorks
+\item RTLinux, RTAI, Xenomai
+\item Windows CE
+\end{itemize}
+\end{itemize}
+\subsubsection{Embedded Operating Systems}
+\label{sec:org19a0ac2}
+\begin{itemize}
+\item Characteristics:
+\begin{itemize}
+\item Usually real-time systems, sometimes hard real-time systems
+\item Very small memory footprint (even today!)
+\item No or limited user interaction
+\item 90-95 \% of all processors are running embedded operating systems
+\end{itemize}
+\item Examples:
+\begin{itemize}
+\item Embedded Linux, Embedded BSD
+\item Symbian OS, Windows Mobile, iPhone OS, BlackBerry OS, Palm OS
+\item Cisco IOS, JunOS, IronWare, Inferno
+\item Contiki, TinyOS, RIOT
+\end{itemize}
+\end{itemize}
+\subsection{evolution of os}
+\label{sec:orgb38d012}
+\begin{itemize}
+\item Vacuum Tubes: no operating system
+\item Transistors: batch systems automatically process job queues
+\item Integrated Circuit: Spooling (Simultaneous Peripheral Operation On Line), Multiprogramming and Time-sharing
+\item VLSI: Personal computer (CP/M, MS-DOS, Windows, Mac OS, Unix), Network operating systems (Unix), Distributed operating systems (Amoeba, Mach, V)
+\end{itemize}
+\subsection{Monolithic and Modular Operating Systems}
+\label{sec:orgede1d68}
+\begin{itemize}
+\item Example: Linux
+\item Modules can be platform independent
+\item Easier to maintain and to develop
+\item Increased reliability / robustness
+\item All services are in the kernel with the same privilege level
+\item May reach high efficiency Example: Linux
+\end{itemize}
+\subsection{Monolithic and Layered Operating Systems}
+\label{sec:org87d9aec}
+\begin{itemize}
+\item Easily portable, significantly easier to maintain
+\item Often reduced efficiency because of the need to go through many layered interfaces
+\item Rigorous implementation of the stacked virtual machine perspective
+\item Services offered by the various layers are important for the overall performance
+\item Example: THE (Dijkstra, 1968)
+\end{itemize}
+\subsection{Virtual Machines}
+\label{sec:orgb37e637}
+\begin{itemize}
+\item Virtualization of the hardware
+\item Multiple operating systems can execute concurrently
+\item Separation of multi-programming from other operating system services
+\item Examples: IBM VM/370 (’79), VMware (1990s), XEN (2003)
+\end{itemize}
+\subsection{micro kernel}
+\label{sec:orgd529a03}
+\begin{itemize}
+\item bring up the driver, just implement the minimum of a kernel
+\end{itemize}
+\section{Hardware}
+\label{sec:org5fb92e9}
+\subsection{Common Computer Architecture}
+\label{sec:org2ceae66}
+\begin{itemize}
+\item sequencer
+\item ALU
+\item Registers
+\item buses:
+\begin{itemize}
+\item control bus
+\item address bus
+\item data bus
+\end{itemize}
+\end{itemize}
+\subsubsection{CPU registers}
+\label{sec:orgfc0990e}
+\begin{itemize}
+\item Typical set of registers:
+\begin{itemize}
+\item Processor status register
+\item Instruction register (current instruction)
+\item Program counter (current or next instruction) - Stack pointer (top of stack)
+\item Special privileged registers
+\item Dedicated registers
+\item Universal registers
+\end{itemize}
+\item Privileged registers are only accessible when the processor is in privileged mode
+\item Switch from non-privileged to privileged mode via traps or interrupts
+\end{itemize}
+\subsubsection{}
+\label{sec:org77de38c}
+\subsection{I/O Systems and Interrupts}
+\label{sec:org624e4c3}
+\subsubsection{I/O Devices}
+\label{sec:org3dab95f}
+\begin{itemize}
+\item I/O devices are essential for every computer
+\item Typical classes of I/O devices:
+\begin{itemize}
+\item clocks, timers
+\item user-interface devices
+\item document I/O devices (scanner, printer, \ldots{})   - audio and video equipment
+\item network interfaces
+\item mass storage devices
+\item sensors and actuators in control applications
+\end{itemize}
+\item Device drivers are often the biggest component of general purpose operating system kernels
+\end{itemize}
+\subsubsection{Basic I/O Programming}
+\label{sec:orgabd7e4c}
+\begin{itemize}
+\item \textbf{Status driven}: the processor polls an I/O device for information
+\begin{itemize}
+\item Simple but inefficient use of processor cycles
+\end{itemize}
+\item \textbf{Interrupt driven}: the I/O device issues an interrupt when data is available or an I/O operation has been completed
+\begin{itemize}
+\item Program controlled: Interrupts are handled by the processor directly
+\item Program initiated: Interrupts are handled by a DMA-controller and no processing is performed by the processor (but the DMA transfer might steal some memory access
+\end{itemize}
+cycles, potentially slowing down the processor)
+\begin{itemize}
+\item Channel program controlled: Interrupts are handled by a dedicated channel device, which is usually itself a micro-processor
+\end{itemize}
+\end{itemize}
+\subsubsection{Interrupts}
+\label{sec:org014d943}
+\begin{itemize}
+\item Interrupts can be triggered by hardware and by software
+\begin{itemize}
+\item clock interrupts
+\item keyboard
+\item timer
+\end{itemize}
+\item Interrupt control:
+\begin{itemize}
+\item grouping of interrupts
+\item encoding of interrupts
+\item prioritizing interrupts
+\item enabling / disabling of interrupt sources
+\end{itemize}
+\item Interrupt identification:
+\begin{itemize}
+\item interrupt vectors, interrupt states
+\end{itemize}
+\item Context switching:
+\begin{itemize}
+\item mechanisms for CPU state saving and restoring
+\end{itemize}
+\end{itemize}
+\subsubsection{Interrup Servie Routines}
+\label{sec:orgd703584}
+\begin{itemize}
+\item minimal hardware support (supplied by the CPU)
+\begin{itemize}
+\item save essential CPU registers
+\item jump to the vectorized interrupt servie routine
+\item restore essential CPU register to return
+\end{itemize}
+\item minimal wrapper (supplied by the OS)
+\begin{itemize}
+\item Save remaining CPU registers
+\item Save stack-frame
+\item Execute interrupt service code
+\item Restore stack-frame
+\item Restore CPU registers
+\end{itemize}
+\end{itemize}
+\subsection{Memory}
+\label{sec:orgb22ed16}
+\subsubsection{memory size and access time}
+\label{sec:org015a105}
+\begin{itemize}
+\item trade-off between memory speed and memory size
+\begin{itemize}
+\item register is fast, but super small
+\item L1, L2, L3 cache increases in size, decrease in speed
+\item main memory, big
+\item disk
+\end{itemize}
+\end{itemize}
+\subsubsection{memory segments}
+\label{sec:org7e61dcb}
+\begin{table}[htbp]
+\caption{Different Segments in Memory}
+\centering
+\begin{tabular}{ll}
+Segments & Description\\
+\hline
+text & machine instructions\\
+data & static variable and constants, may be further devided into initialized and uninitialized data\\
+heap & dynamically allocated data structures\\
+stack & automatically allocated local variables, management of function calls\\
+\end{tabular}
+\end{table}
+\begin{itemize}
+\item Memory used by a program is usually partitioned into different segments that serve different purposes and may have different access rights
+\end{itemize}
+\subsubsection{stack frame}
+\label{sec:orgf91510d}
+\begin{itemize}
+\item arguments pushed onto the stack in a reverse order
+\item buttom is arguments for the function calls
+\item then return address(instruction pointer)
+\item frame pointer
+\item stack locals
+\end{itemize}
+\subsubsection{stack smashing attack}
+\label{sec:org12ea5c6}
+\begin{itemize}
+\item unchecked boundry will lead to stack overflow
+\end{itemize}
+\subsubsection{caching}
+\label{sec:orgffb58ca}
+\begin{itemize}
+\item caching is A general technique to speed up memory access by introducing smaller and faster memories which keep a copy of frequently / soon needed data
+\item cache hit: A memory access which can be served from the cache memory
+\item cache miss: A memory access which cannot be served from the cache and requires access to slower memory
+\item cache write through: A memory update which updates the cache entry as well as the slower memory cell
+\item Delayed write: A memory update which updates the cache entry while the slower memory cell is updated at a later point in time
+\end{itemize}
+\subsubsection{Locality}
+\label{sec:org5e0a0f7}
+\begin{itemize}
+\item Cache performance is relying on:
+\begin{itemize}
+\item Spatial locality: Nearby memory cells are likely to be accessed soon
+\item Temporal locality: Recently addressed memory cells are likely to be accessed again soon
+\end{itemize}
+\item Iterative languages generate linear sequences of instructions (spatial locality)
+\item Functional / declarative languages extensively use recursion (temporal locality)
+\item CPU time is in general often spend in small loops/iterations (spatial and temporal locality)
+\item Data structures are organized in compact formats (spatial locality)
+\end{itemize}
+\section{Processes and Thread}
+\label{sec:org1b06491}
+\subsection{Fundamental Concepts}
+\label{sec:orgf7ea0a7}
+\subsubsection{Separation of Mechanisms and Policies}
+\label{sec:org4c30b8a}
+\begin{itemize}
+\item An important design principle is the separation of policy from mechanism.
+\item Mechanisms determine how to do something.
+\item Policies decide what will be done.
+\item The separation of policy and mechanism is important for flexibility, especially since policies are likely to change.
+\end{itemize}
+\subsubsection{User Mode}
+\label{sec:org6996b62}
+\begin{itemize}
+\item the processor executes machine instructions of (user space) processes;
+\item the instruction set of the processor is restricted to the so called unprivileged instruction set;
+\item the set of accessible registers is restricted to the so called unprivileged register set;
+\item the memory addresses used by a process are typically mapped to physical memory addresses by a memory management unit;
+\item direct access to hardware components is protected by using hardware protection where possible;
+\item direct access to the state of other concurrently running processes is restricted.
+\end{itemize}
+\subsubsection{System Mode}
+\label{sec:org4836360}
+\begin{itemize}
+\item the processor executes machine instructions of the operating system kernel;
+\item all instructions of the processor can be used, the so called privileged instruction set;
+\item all registers are accessible, the so called privileged register set;
+\item direct access to physical memory addresses and the memory address mapping tables is enabled;
+\item direct access to the hardware components of the system is enableds;
+\item the direct manipulation of the state of processes is possible.
+\end{itemize}
+\subsubsection{Entering the Operating System Kernel}
+\label{sec:orga49df96}
+\begin{itemize}
+\item System calls
+\begin{itemize}
+\item Synchronous to the running process
+\item Parameter transfer via registers, the call stack or a parameter block
+\end{itemize}
+\item Hardware traps
+\begin{itemize}
+\item Synchronous to a running process (devision by zero)
+\item Forwarded to a process by the operating system
+\end{itemize}
+\item Hardware interrupts
+\begin{itemize}
+\item Asynchronous to the running processes
+\item Call of an interrupt handler via an interrupt vector
+\end{itemize}
+\item Software interrupts
+\begin{itemize}
+\item Asynchronous to the running processes
+\end{itemize}
+\end{itemize}
+\subsection{Processes}
+\label{sec:orge3d4cd7}
+\subsubsection{Characteristics}
+\label{sec:org4d62b43}
+\begin{itemize}
+\item an instance of a program under execution
+\item A process uses/owns resources (CPU, memory, file) and is charactererized by the following:
+\begin{enumerate}
+\item A sequence of machine instructions which determines the behavior of the running program (control flow)
+\item The current state of the process given by the content of the processor’s registers, the contents of the stack, and the contents of the heap (internal state)
+\item The state of other resources (e.g., open files or network connections, timer, devices) used by the running program (external state)
+\end{enumerate}
+\item Processes are sometimes also called tasks.
+\end{itemize}
+\subsubsection{State Machine View of Processes}
+\label{sec:orga74aea9}
+\begin{itemize}
+\item new: just created
+\item ready: ready to running
+\item running: executing
+\item blocked: not ready to run, wait for resources
+\item terminated: just finished, not yet removed
+\end{itemize}
+\subsubsection{Queueing Model View of Processes}
+\label{sec:org9fc01eb}
+\begin{itemize}
+\item Processes are enqueued if resources are not readily available or if processes wait for events
+\item Dequeuing strategies have strong performance impact
+\item Queueing models can be used for performance analysis
+\end{itemize}
+\subsubsection{Process Control Block}
+\label{sec:orgec41595}
+\begin{itemize}
+\item process are internally represented by a process control block (PCB)
+\begin{itemize}
+\item process identification
+\item process state
+\item saved registers during context switches
+\item scheduling information
+\item assigned memory regions
+\item open files or network connections
+\item accounting info (\# of CPU cycles, IO operations)
+\item pointers to other PCBs
+\end{itemize}
+\end{itemize}
+\subsubsection{Process Lists}
+\label{sec:org71388a5}
+\begin{itemize}
+\item PCBs are often organized in doubly-linked lists or tables
+\item can be queued by pointer operations
+\item run queue length of the CUP is a good load indicator
+\item The system load often defined as the exponentially smoothed average of the run queue length over 1, 5 and 15 minutes
+\begin{itemize}
+\item usually count when there is a interrupt
+\end{itemize}
+\end{itemize}
+\subsubsection{Process Creation}
+\label{sec:org8ee2216}
+\begin{itemize}
+\item The fork() system call creates a new child process
+\begin{itemize}
+\item which is an exact copy of the parent process
+\item except that the result of the system call differs
+\end{itemize}
+\item exec() system call replaces the current process image with a new process image
+\end{itemize}
+\subsubsection{Process Tree}
+\label{sec:org8d9c0cc}
+\begin{itemize}
+\item the first process is created when the system is initialized (init / systemd)
+\item All other processes are created using fork(), which leads to a process tree
+\item PCBs often contain pointers to parent PCBs
+\end{itemize}
+\subsubsection{Process Termination}
+\label{sec:org621a66a}
+\begin{itemize}
+\item Processes can terminate themself by calling exit()
+\item The wait() system call allows processes to wait for the termination of a child process
+\item Terminating processes return a numeric result code
+\item shell application:
+\begin{itemize}
+\item first fork
+\item in the child we execute the operation
+\item and the parent wait() for the child
+\end{itemize}
+\end{itemize}
+\subsubsection{POSIX API (fork, exec)}
+\label{sec:orga576998}
+\begin{verbatim}
+#include <unistd.h>
+pid_t getpid(void);
+pid_t getppid(void);
+pid_t fork(void);
+int execve(const char  *filename, char *const argv [],
+           char *const envp[]);
+extern char **environ;
+int execl(const char *path, const char *arg, ...);
+int execlp(const char *file, const char *arg, ...);
+int execle(const  char  *path,  const  char  *arg, ...,
+           char * const envp[]);
+int execv(const char *path, char *const argv[]);
+int execvp(const char *file, char *const argv[]);
+\end{verbatim}
+\subsubsection{POSIX API (wait, exit)}
+\label{sec:org1903395}
+\begin{verbatim}
+#include <stdlib.h>
+void exit(int status);
+int atexit(void (*function)(void));
+#include <unistd.h>
+void _exit(int status);
+pid_t wait(int *status);
+pid_t waitpid(pid_t pid, int *status, int options); // wait for a process
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
+pid_t wait3(int *status, int options, struct rusage *rusage);
+pid_t wait4(pid_t pid, int *status, int options, struct rusage *rusage);
+\end{verbatim}
+\end{document}

@@ -1,0 +1,6 @@
+* Info
+** Prerequisites
+- Gen CS I/II, some programming, basic algebra
+  + data structure, OOP
+** slides
+http://www.faculty.jacobs-university.de/pbaumann/iu-bremen.de_pbaumann//Courses/Databases+WebServices/index.php

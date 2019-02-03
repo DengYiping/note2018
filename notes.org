@@ -1,0 +1,12 @@
+** 2017 - Overcoming Catastrophic Interference By Conceptors
+ :PROPERTIES:
+  :Custom_ID: he17_overc_catas_inter_by_concep
+  :AUTHOR: He \& Jaeger
+  :JOURNAL: CoRR
+  :YEAR: 2017
+  :VOLUME: 
+  :PAGES: 
+  :DOI: 
+  :URL: http://arxiv.org/abs/1707.04853v2
+ :END:
+cite:he17_overc_catas_inter_by_concep

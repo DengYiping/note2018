@@ -1,0 +1,166 @@
+% Created 2018-10-02 Tue 08:56
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Yiping Deng}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={Yiping Deng},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.1.14)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{Presentation}
+\label{sec:orgc2cf30a}
+\subsection{Logistics:}
+\label{sec:org388231e}
+Tuesday 8:15 - 9:30
+Friday 9:45 - 11:00
+\subsection{Grading}
+\label{sec:orgb47f9f5}
+\begin{itemize}
+\item Homework 60\%
+\item Final exam 20\%
+\item Midterm exam 20\%
+\end{itemize}
+\subsection{Work}
+\label{sec:orgc901e62}
+\begin{itemize}
+\item Regular quizzes
+\item Homework/ project -> pre-requisite to take the final exam
+\begin{itemize}
+\item won't accept any homework if it is late.
+\end{itemize}
+\end{itemize}
+\subsection{Health excuses}
+\label{sec:org0962223}
+Not accepting health excuses.
+\section{Introduction to Computer Vision}
+\label{sec:org79c842d}
+The goal of computer vision to bridging the gap between pixels and meaning.
+\subsection{what is vision?}
+\label{sec:org6774e00}
+\begin{itemize}
+\item humans: -> images -> sensing devices -> iterpreting device -> interpretations
+\item computers: -> images -> cameras -> computers -> interpretation
+\end{itemize}
+\subsection{what information to extract?}
+\label{sec:org237b84f}
+\begin{itemize}
+\item Metric 3D information
+\item Semantics
+\end{itemize}
+\subsection{what is color?}
+\label{sec:orga618740}
+\begin{itemize}
+\item the result of ityeraction between physical light in the environment and our visual system.
+\item A psychological property of our visual experiences when we look at objects and lights, not a physical property of those objects or lights.
+\end{itemize}
+\subsection{two types of light sensitive receptors}
+\label{sec:orgd59f894}
+\begin{itemize}
+\item cones: cone-shaped, less sensitive, operate in high light, color vision
+\item Rods: rod-shaped, highly snesitive, operate at night, gray-scala vision
+\end{itemize}
+\subsection{trichromacy}
+\label{sec:org3130cc2}
+\begin{itemize}
+\item three numbers seem to be sufficient for encoding color
+\item dates back to 18th centuary.
+\item don't have to be always RGB
+\end{itemize}
+\subsection{RGB v. HSV}
+\label{sec:orgdd85f80}
+\begin{itemize}
+\item RGB: component
+\item HSV: hue, saturation, value
+\end{itemize}
+\subsection{white balance:}
+\label{sec:org12fa03e}
+\begin{itemize}
+\item it is the process of removing unrealistic color casts, so that objects which appear white in person are rendered white in you photo.
+\item whne the white balance is not correct, the picture will have n unnatural color "cast".
+\end{itemize}
+\subsubsection{Film cameras:}
+\label{sec:org95c38c3}
+different types of film or different filteres for different illumination condition
+\subsubsection{digital cmeras}
+\label{sec:org0102488}
+\begin{itemize}
+\item automatic white balance
+\item custom white balancing using a reference objects
+\end{itemize}
+\subsubsection{Von Kries adaptation}
+\label{sec:org1327b2c}
+\begin{itemize}
+\item multiply each channel by a gain factor
+\item A more general approach would correspond to an arbitrary 3x3 matrix
+\end{itemize}
+\subsubsection{Best way: gray card}
+\label{sec:org68a5d51}
+\begin{itemize}
+\item take a pciture of a neutral object (gray/white)
+\item deduct the weight of each channel, use the inverse of the weight to calibrate each channel.
+\item without gray card, we need to guess
+\begin{itemize}
+\item using the average of the image, assume it is gray
+\end{itemize}
+\end{itemize}
+\subsubsection{Brightest pixel assumption (non-saturated)}
+\label{sec:orge741d15}
+\begin{itemize}
+\item highlights usually have the color of the light source
+\item Use weights inversely proportional to the values of the pixel
+\end{itemize}
+\subsubsection{Gamut mapping}
+\label{sec:orge68e53c}
+\section{Scale-invariant}
+\label{sec:orgca9d768}
+\section{Detectors}
+\label{sec:org90ebc1c}
+\subsection{Harris detector}
+\label{sec:org96b1669}
+\subsubsection{mathematics}
+\label{sec:org1562141}
+\[ E(u, v) = \sum_{x, y} w(x, y) [I(x + u, y + v) - I(x, y)]\]
+This equation is computational expensive, so we can use the first order Taylor
+\begin{align*}
+&\sum_{x, y} [I(x + u, y + v) - I(x, y)] \\
+&= \sum_{x, y} [I(x,v) + u I_x + v I_y - I(x, y)] \\
+&= u^2 I_x^2  2 u v I_x I_y + v^2 I_y^2 \\
+&= [u v] (\sum \begin{bmatrix} I_x^2 & I_x I_y \\ I_x I_y & I_y^2 \end{bmatrix}) [u v]'
+\end{align*}
+
+Thus, we can have a bilinear approximation
+\[ M = (\sum w(x,y) \begin{bmatrix} I_x^2 & I_x I_y \\ I_x I_y & I_y^2 \end{bmatrix})  \]
+and 
+\[ E(u, v) \approx [u, v] M [u, v]' \]
+\subsubsection{cornerness}
+\label{sec:org77ada36}
+We look at the two eigen value of the \(M\) matrix. With two big eigenvalues,
+it means it is a corner. If one is significantly bigger than the other, it is
+a edge. If both small, it is plain images.
+We write
+\[ R = det(M) - k \cdot tr(M)^2 \], where \(det(M) = \lambda_1 \lambda_2\),
+\(tr(M) = \lambda_1 + \lambda_2\)
+\subsection{}
+\label{sec:org5b773d9}
+\end{document}

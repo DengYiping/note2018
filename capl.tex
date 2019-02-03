@@ -1,0 +1,307 @@
+% Created 2018-09-14 Fri 11:30
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\title{Crazy Document}
+\author{Yiping Deng}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={Yiping Deng},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.1 (Org mode 9.1.14)}, 
+ pdflang={'en'}}
+\begin{document}
+
+\tableofcontents
+\maketitle
+\section{Info}
+\label{sec:org800c109}
+course website: \url{https://grader.eecs.jacobs-university.de/courses/320241/2018\_2/} \\
+office hours: Mondays 10:00 - 12:00 \\
+there are two TAs, they will hold tutorials. \\
+\subsection{books:}
+\label{sec:org460b20a}
+\begin{itemize}
+\item digital systems
+\item computer organization and design
+\item Compilers: Principles, Techniques, and Tools(Dragon book)
+\item Compiler Design in C
+\end{itemize}
+\subsection{goals:}
+\label{sec:org09cee48}
+understand the basic knowledge of:
+\begin{itemize}
+\item computer architecture
+\item data representation
+\item instruction set architectures
+\item datapath and control
+\begin{itemize}
+\item why are logic gate important, how to optimize
+\end{itemize}
+\item programming languages characteristics
+\item phases of compilation
+\end{itemize}
+\subsection{grading scheme:}
+\label{sec:orgbd94059}
+\begin{itemize}
+\item 30\% homework(in total 12)
+\item 30\% midterm
+\item 40\% final
+\end{itemize}
+\subsection{homework:}
+\label{sec:orgc72b31f}
+\begin{itemize}
+\item individual submission
+\item homework should be submitted in a single pdf, need a \href{https://grader.eecs.jacobs-university.de/courses/320241/2018\_2/lectures/template\_hw.tex}{homework template}
+\item homework is due on Tuesday 14:00 sharp
+\end{itemize}
+\subsubsection{grading criteria}
+\label{sec:org964fc9d}
+\begin{itemize}
+\item 10\% homeowork formatting
+\item 50- 70\% intermediate steps
+\end{itemize}
+\subsection{tutorials:}
+\label{sec:orga23d9b4}
+\begin{itemize}
+\item Sundays in West Hall 4 at 17:00
+\end{itemize}
+\section{Introduction}
+\label{sec:org433aa70}
+\subsection{history}
+\label{sec:org092c7a2}
+\begin{enumerate}
+\item mechanical machines
+\item electronic mchines
+\item digital computers
+\item networking
+\end{enumerate}
+\subsection{processor}
+\label{sec:orgc0fcbcc}
+\begin{itemize}
+\item Pentium I: 60MHz, 800 nm
+\item Nehalem: 45 nm
+\item Gulfdown: 32 nm
+\end{itemize}
+\subsection{numerical representation and numerical system}
+\label{sec:org7ea9f90}
+\subsubsection{analog v. digital}
+\label{sec:orga9c06c3}
+physical systems use quantities which must be manipulated
+arithmetically. Quantities may be represented numerically in either analog or
+digital form.
+\begin{itemize}
+\item analog: a continuous variable, proportional indicator
+\item digital: varies in discrete step
+\end{itemize}
+\begin{table}[htbp]
+\caption{Digital v. Analog}
+\centering
+\begin{tabular}{ll}
+Digital & Analog\\
+\hline
+discrete steps & a continuous variable\\
+ease of design & \\
+well suited for storing information & \\
+accurate and easy to maintain & \\
+programmable operation & \\
+less affected by noise & \\
+ease of fabrication & \\
+\end{tabular}
+\end{table}
+\subsubsection{digital number systems}
+\label{sec:org9d99af2}
+\begin{itemize}
+\item decimal systems
+\begin{itemize}
+\item 10 symbols: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+\item each number is a digit
+\item most significant digit (MSD) and least significant digit (LSD)
+\item Positional value may be stated as a digit multiplied by a power of 10
+\end{itemize}
+\item binary systems
+\begin{itemize}
+\item lends itselfs to electronic circuit design
+\item can convert to other representation
+\item Positional value may be stated as a digit multiplied by a power of 2
+\end{itemize}
+\end{itemize}
+\subsubsection{digital circuit v. logic circuit}
+\label{sec:org2fca257}
+\begin{itemize}
+\item Digital circuits – produce and respond to predefined voltage ranges
+\item Logic circuits – used interchangeably with the term, digital circuits
+\item Digital integrated circuits (ICs) – provide logic operations in a small reliable package
+\end{itemize}
+\subsubsection{parallel v. serial}
+\label{sec:org8469d59}
+\begin{itemize}
+\item Parallel transmission – all bits in a binary number are transmitted simultaneously. A separate line is required for each bit
+\item Serial transmission – each bit in a binary number is transmitted per some time interval
+\item Both methods have useful applications which will be seen in later chapters
+\end{itemize}
+\subsubsection{memory}
+\label{sec:org1d5ecf5}
+\begin{itemize}
+\item A circuit which retains a response to a momentary input is displaying memory
+\item Memory is important because it provides a way to store binary numbers temporarily or permanently
+\item Memory elements include:
+\begin{itemize}
+\item Magnetic
+\item Optical
+\item Electronic latching circuits
+\end{itemize}
+\end{itemize}
+\section{Digital system}
+\label{sec:org3a04e90}
+\subsection{Conversion}
+\label{sec:orga0ea7f1}
+\subsubsection{Binary system}
+\label{sec:orga747be8}
+\begin{enumerate}
+\item Binary to decimal conversion
+\label{sec:org0814c6c}
+Just simply raise 2 to the corresponding power and time the digit from right to the left
+\item Decimal to binary conversion
+\label{sec:org45df9e2}
+Repeated integer division. We continuously divide the number by 2, note down all the reminder, and then reverse the order
+\end{enumerate}
+\subsubsection{Hexadecimal Number system}
+\label{sec:org7edd546}
+\begin{itemize}
+\item base 16, 16 possible symbols, 0 - 9 and A - F
+\item uses groups of 4 bits
+\item allows for convenient handling of long binary strings
+\end{itemize}
+\begin{enumerate}
+\item hexadecimal to decimal
+\label{sec:org33e2bb4}
+163\(_{\text{16}}\) = 1 * (16\(^{\text{2}}\)) + 6 * (16\(^{\text{1}}\)) + 3 * (16\(^{\text{0}}\))
+\item decimal to hexadecimal
+\label{sec:org90bf14c}
+still using repeated integer division
+\item hexadecimal to binary
+\label{sec:orge1bc293}
+use the conversion table
+\item binary to hexadecimal
+\label{sec:org18753b8}
+note that we group 4 bits from the right, fill in 0 on the left side if the number of digits are not divisiable by 4
+\end{enumerate}
+\subsubsection{Binary-coded decimal(BCD)}
+\label{sec:orgf1de88c}
+\begin{itemize}
+\item each decimal digits are converted to binary accordingly.
+\item Programmable calculators manufactured by Texas Instruments.
+\item it is not a number system
+\end{itemize}
+\subsubsection{Bytes, Nibbles and Words}
+\label{sec:orgf69edf4}
+\begin{itemize}
+\item 1 byte = 8 bits
+\item 1 nibble = 4 bits
+\item 1 word = depending on a data bus width
+\begin{itemize}
+\item x86: 32 bits
+\item arm64: 64bits
+\end{itemize}
+\end{itemize}
+\subsubsection{ASCII code}
+\label{sec:org9e5d467}
+\begin{itemize}
+\item 0 - 127
+\end{itemize}
+\subsection{Logic Functions}
+\label{sec:org9d88606}
+\subsubsection{boolean constants and variables}
+\label{sec:org316d2f1}
+\begin{itemize}
+\item Boolean algebra allows only value 0 and 1
+\item Logic 0 can be: false / off / low / open switch
+\item Logic 1 can be: true / on / high / close switch
+\item three basic logic operators:
+\begin{itemize}
+\item OR
+\item AND
+\item NOT
+\end{itemize}
+\end{itemize}
+\subsubsection{to generate truth table}
+\label{sec:org44654ed}
+\begin{verbatim}
+from itertools import zip_longest as izip, product, tee
+
+# Logic functions: take and return iterators of truth values
+
+def AND(a, b):
+    for p, q in izip(a, b):
+        yield p and q
+
+def OR(a, b):
+    for p, q in izip(a, b):
+        yield p or q
+
+def NOT(a):
+    for p in a:
+        yield not p
+
+def EQUIV(a, b):
+    for p, q in izip(a, b):
+        yield p is q
+
+def IMPLIES(a, b):
+    for p, q in izip(a, b):
+        yield (not p) or q
+
+def create(num=2):
+    ''' Returns a list of all of the possible combinations of truth for the given number of variables.
+    ex. [(T, T), (T, F), (F, T), (F, F)] for two variables '''
+    return list(product([True, False], repeat=num))
+
+def unpack(data):
+    ''' Regroups the list returned by create() by variable, making it suitable for use in the logic functions.
+    ex. [(T, T, F, F), (T, F, T, F)] for two variables '''
+    return [[elem[i] for elem in lst] for i, lst in enumerate(tee(data, len(data[0])))]
+
+def print_result(data, result):
+    ''' Prints the combinations returned by create() and the results returned by the logic functions in a nice format. '''
+    n = len(data[0])
+    headers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[:n]
+    begin_format = '|'.join(n * 'c')
+    begin_str = '\\begin{tabular}{|' + begin_format + '|c|}'
+    print(begin_str)
+    print('\\hline')
+    print(' & '.join(headers) + ' & Result \\\\')
+    print('\\hline')
+    for row, result_cell in izip(data, result):
+        print(' & '.join({True: 'T', False:'F'}[cell] for cell in row) + ' &' + ' ' + {True: 'T', False:'F'}[result_cell] + ' \\\\')
+    print('\\hline')
+    print('\\end{tabular}')
+data = create(num=4)
+A, B, C, D= unpack(data)
+result = OR(OR(OR(A, B), C), D)
+print_result(data, result)
+\end{verbatim}
+\subsection{Logic Circuits}
+\label{sec:orgd226282}
+\subsubsection{Minimization of Logic Expression: rules}
+\label{sec:org2e5d079}
+\begin{itemize}
+\item \(w(y + z) = wy + wz\)   (distributive rule)
+\item \(w + \overline{w} = 1\)
+\end{itemize}
+\end{document}

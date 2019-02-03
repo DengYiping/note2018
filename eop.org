@@ -1,0 +1,8 @@
+* Info
+** grading scheme
+- weekly homework 30%
+- final exam 70%
+** course info
+[[https://sites.google.com/site/kmallahikarai/eop18][course website]]
+- office hourse: Tuesdays, 16 - 17H, RES I, 108
+- mailing list: course-eop18@list.jacobs-university.de

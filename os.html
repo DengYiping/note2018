@@ -1,0 +1,1875 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="'en'" xml:lang="'en'">
+<head>
+<!-- 2018-10-04 Thu 16:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Yiping Deng" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org1219cf6">1. Info</a>
+<ul>
+<li><a href="#orgf138aa3">1.1. grading scheme</a></li>
+</ul>
+</li>
+<li><a href="#orgeeb9d65">2. Tools</a></li>
+<li><a href="#org0975c16">3. Intro</a>
+<ul>
+<li><a href="#orgf7a3d34">3.1. system call v. library call</a></li>
+<li><a href="#org878f673">3.2. requirement of OS</a></li>
+<li><a href="#org7983cff">3.3. services for application</a></li>
+<li><a href="#org3a707a1">3.4. services for system operations</a></li>
+<li><a href="#org8dbdb1f">3.5. to trace the library call</a></li>
+<li><a href="#orgcdae3f2">3.6. to trace the system call</a></li>
+<li><a href="#org53d48ae">3.7. to show library used in the problem</a></li>
+<li><a href="#org03c6942">3.8. printf v. write</a></li>
+<li><a href="#org99c3f4c">3.9. return value of the main function</a></li>
+<li><a href="#org771fa02">3.10. what happened in the hello world program</a></li>
+<li><a href="#org2c64ede">3.11. kernel space</a></li>
+<li><a href="#org5d49e0d">3.12. types of operating system</a>
+<ul>
+<li><a href="#org0c2c099">3.12.1. Batch Processing Operating Systems</a></li>
+<li><a href="#org448ea51">3.12.2. General Purpose Operating Systems</a></li>
+<li><a href="#orgd134522">3.12.3. Parallel Operating Systems</a></li>
+<li><a href="#org6ecf336">3.12.4. Distributed Operating Systems</a></li>
+<li><a href="#orgbf21801">3.12.5. Real-time Operating Systems</a></li>
+<li><a href="#orgd92725a">3.12.6. Embedded Operating Systems</a></li>
+</ul>
+</li>
+<li><a href="#org124c8b7">3.13. evolution of os</a></li>
+<li><a href="#orgbd417cd">3.14. Monolithic and Modular Operating Systems</a></li>
+<li><a href="#org9beb71c">3.15. Monolithic and Layered Operating Systems</a></li>
+<li><a href="#orgb21ebbd">3.16. Virtual Machines</a></li>
+<li><a href="#org7eb887b">3.17. micro kernel</a></li>
+</ul>
+</li>
+<li><a href="#org18f50e1">4. Hardware</a>
+<ul>
+<li><a href="#org1de86d6">4.1. Common Computer Architecture</a>
+<ul>
+<li><a href="#org9082999">4.1.1. CPU registers</a></li>
+</ul>
+</li>
+<li><a href="#org53239aa">4.2. I/O Systems and Interrupts</a>
+<ul>
+<li><a href="#orgf6c1ad5">4.2.1. I/O Devices</a></li>
+<li><a href="#org127284d">4.2.2. Basic I/O Programming</a></li>
+<li><a href="#org7d6bba0">4.2.3. Interrupts</a></li>
+<li><a href="#org02a6eda">4.2.4. Interrupts Servie Routines</a></li>
+</ul>
+</li>
+<li><a href="#org2254afa">4.3. Memory</a>
+<ul>
+<li><a href="#org977dc96">4.3.1. memory size and access time</a></li>
+<li><a href="#org56e1cf6">4.3.2. memory segments</a></li>
+<li><a href="#org0da1b63">4.3.3. stack frame</a></li>
+<li><a href="#orge7f24ec">4.3.4. stack smashing attack</a></li>
+<li><a href="#org9364289">4.3.5. caching</a></li>
+<li><a href="#org3a87779">4.3.6. Locality</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org8822622">5. Processes and Thread</a>
+<ul>
+<li><a href="#org1b88e2a">5.1. Fundamental Concepts</a>
+<ul>
+<li><a href="#orge752834">5.1.1. Separation of Mechanisms and Policies</a></li>
+<li><a href="#orga686c85">5.1.2. User Mode</a></li>
+<li><a href="#org262c123">5.1.3. System Mode</a></li>
+<li><a href="#orgd257e00">5.1.4. Entering the Operating System Kernel</a></li>
+</ul>
+</li>
+<li><a href="#org66a1566">5.2. Processes</a>
+<ul>
+<li><a href="#orgb6e4c9a">5.2.1. Characteristics</a></li>
+<li><a href="#org465ea77">5.2.2. State Machine View of Processes</a></li>
+<li><a href="#orgdce50f3">5.2.3. Queueing Model View of Processes</a></li>
+<li><a href="#org03c6a80">5.2.4. Process Control Block</a></li>
+<li><a href="#org831af3b">5.2.5. Process Lists</a></li>
+<li><a href="#org7567109">5.2.6. Process Creation</a></li>
+<li><a href="#org635e189">5.2.7. Process Tree</a></li>
+<li><a href="#orgecb81fe">5.2.8. Process Termination</a></li>
+<li><a href="#orga377330">5.2.9. POSIX API (fork, exec)</a></li>
+<li><a href="#orgdbf8324">5.2.10. POSIX API (wait, exit)</a></li>
+<li><a href="#orgcd3fcc0">5.2.11. Sketch of a Command Interpreter: REPL</a></li>
+<li><a href="#org8102eec">5.2.12. Context Switch</a></li>
+<li><a href="#orgd07510d">5.2.13. vfork()</a></li>
+</ul>
+</li>
+<li><a href="#org9ae9b35">5.3. Threads</a>
+<ul>
+<li><a href="#orgefbb0ed">5.3.1. What is threads</a></li>
+<li><a href="#org8349995">5.3.2. POSIX thread API</a></li>
+<li><a href="#orgf4ecc0f">5.3.3. process and thread in Linux</a></li>
+<li><a href="#org546d75d">5.3.4. process and thread in Linux</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org692d580">6. Synchronization</a>
+<ul>
+<li><a href="#org6361e5a">6.1. Why threads?</a></li>
+<li><a href="#org8040ca2">6.2. Race Conditions and Critical Sections</a>
+<ul>
+<li><a href="#org4693297">6.2.1. Race conditions</a></li>
+<li><a href="#org21b3e48">6.2.2. Bounded Buffer Program</a></li>
+<li><a href="#org9a1c87d">6.2.3. Critical Sections</a></li>
+<li><a href="#org49459e9">6.2.4. Critical Section Problem</a></li>
+</ul>
+</li>
+<li><a href="#org0082b5e">6.3. Sychronization Mechanisms</a>
+<ul>
+<li><a href="#org63d9f5a">6.3.1. Disabling Interrupts</a></li>
+<li><a href="#org6166e3a">6.3.2. Strict Alternation</a></li>
+<li><a href="#org8772148">6.3.3. Peterson’s Algorithm</a></li>
+<li><a href="#org4d34909">6.3.4. Spin-Locks</a></li>
+<li><a href="#orgf7d285b">6.3.5. Critique of Spin-Locks</a></li>
+</ul>
+</li>
+<li><a href="#org1585b35">6.4. Semaphores</a>
+<ul>
+<li><a href="#org2710fc5">6.4.1. What is Semaphores?</a></li>
+<li><a href="#org025dd0c">6.4.2. Critical Sections and Semaphores</a></li>
+<li><a href="#org6a63695">6.4.3. Bounded Buffer with Semaphores</a></li>
+<li><a href="#org2262e05">6.4.4. Readers / Writers Problem</a></li>
+<li><a href="#org191337b">6.4.5. Dining Philosophers</a></li>
+<li><a href="#orgaf41f4c">6.4.6. Semaphores</a></li>
+</ul>
+</li>
+<li><a href="#org0162d7f">6.5. Critical Regions, Condition variables, Messages</a>
+<ul>
+<li><a href="#orge831764">6.5.1. Critical Regions</a></li>
+<li><a href="#org8f8dab7">6.5.2. Monitors</a></li>
+<li><a href="#org9879044">6.5.3. Conditional Variables</a></li>
+<li><a href="#orgaba5944">6.5.4. Messages</a></li>
+<li><a href="#org3beb757">6.5.5. Message systems</a></li>
+<li><a href="#org9242fa7">6.5.6. Bounded Buffer with Messages</a></li>
+<li><a href="#org695bdc9">6.5.7. Synchronization in Java</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org5ee9eb9">7. Deadlocks</a>
+<ul>
+<li><a href="#org3bfafa8">7.1. Deadlocks</a>
+<ul>
+<li><a href="#org76e3164">7.1.1. necessary deadlock conditions</a></li>
+</ul>
+</li>
+<li><a href="#org082136e">7.2. Resource-Allocation Graph (RAG)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1219cf6" class="outline-2">
+<h2 id="org1219cf6"><span class="section-number-2">1</span> Info</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>course website: <a href="https://cnds.jacobs-university.de/courses/os-2018/">website</a></li>
+<li>slides: <a href="./os_slides.pdf#20">slides</a></li>
+<li>notes: <a href="./os_notes.pdf">notes</a></li>
+</ul>
+</div>
+<div id="outline-container-orgf138aa3" class="outline-3">
+<h3 id="orgf138aa3"><span class="section-number-3">1.1</span> grading scheme</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>final exam 40%</li>
+<li>quizzes 30%
+<ul class="org-ul">
+<li>6 quizzes, with 10 pts each</li>
+</ul></li>
+<li>assignment 30%</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeeb9d65" class="outline-2">
+<h2 id="orgeeb9d65"><span class="section-number-2">2</span> Tools</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>ltrace: to trace the library call</li>
+<li>strace: to trace the system call</li>
+<li>ldd: to show the library used in the programs</li>
+<li>insmod: to insert program into the kernel</li>
+<li>/dev/null: abandon output</li>
+<li>/dev/full: cannot write</li>
+<li>/dev/random: random file</li>
+<li>pmap: to show the memory information for a specific program</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0975c16" class="outline-2">
+<h2 id="org0975c16"><span class="section-number-2">3</span> Intro</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgf7a3d34" class="outline-3">
+<h3 id="orgf7a3d34"><span class="section-number-3">3.1</span> system call v. library call</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>system call is expensive</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org878f673" class="outline-3">
+<h3 id="org878f673"><span class="section-number-3">3.2</span> requirement of OS</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li>An operating system should <b>manage resources</b> in a way that avoids shortages or overload conditions</li>
+<li>An operating system should be <b>efficient</b> and introduce little overhead</li>
+<li>An operating system should be <b>robust against malfunctioning</b> application</li>
+</ul>
+<p>
+programs
+</p>
+<ul class="org-ul">
+<li>Data and programs should be <b>protected against unauthorized access and hardware failures</b></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7983cff" class="outline-3">
+<h3 id="org7983cff"><span class="section-number-3">3.3</span> services for application</h3>
+<div class="outline-text-3" id="text-3-3">
+<ul class="org-ul">
+<li>Loading of programs</li>
+<li>Execution of programs (management of processes)</li>
+<li>High-level input/output operations</li>
+<li>Logical file systems (open(), write(), &#x2026;)</li>
+<li>Control of peripheral devices</li>
+<li>Interprocess communication primitives</li>
+<li>Support of basic communication protocols</li>
+<li>Checkpoint and restart primitives</li>
+<li>&#x2026;</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3a707a1" class="outline-3">
+<h3 id="org3a707a1"><span class="section-number-3">3.4</span> services for system operations</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li>User identification and authentication</li>
+<li>Access control mechanisms</li>
+<li>Support for cryptographic operations and the management of keys - Control functions (e.g., forced abort of processes)</li>
+<li>Testing and repair functions (e.g., file systems checks)</li>
+<li>Monitoring functions (observation of system behavior)</li>
+<li>Logging functions (collection of event logs)</li>
+<li>Accounting functions (collection of usage statistics)
+<ul class="org-ul">
+<li>useful for cloud application</li>
+</ul></li>
+<li>System generation and system backup functions</li>
+<li>Software management functions</li>
+<li>&#x2026;</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8dbdb1f" class="outline-3">
+<h3 id="org8dbdb1f"><span class="section-number-3">3.5</span> to trace the library call</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+`ltrace`
+</p>
+<ul class="org-ul">
+<li>our hello worlds appers to use `putc`, it is done in the compile time</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcdae3f2" class="outline-3">
+<h3 id="orgcdae3f2"><span class="section-number-3">3.6</span> to trace the system call</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+`strace`
+</p>
+<ul class="org-ul">
+<li>it produces write(1, "hello, world")</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org53d48ae" class="outline-3">
+<h3 id="org53d48ae"><span class="section-number-3">3.7</span> to show library used in the problem</h3>
+<div class="outline-text-3" id="text-3-7">
+<p>
+`ldd`
+</p>
+<ul class="org-ul">
+<li>if you use compiler flag -static, it will produces a bigger executable.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org03c6942" class="outline-3">
+<h3 id="org03c6942"><span class="section-number-3">3.8</span> printf v. write</h3>
+<div class="outline-text-3" id="text-3-8">
+<ul class="org-ul">
+<li>use printf, it is buffered. Using the buffer we can reduce the # of system call.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org99c3f4c" class="outline-3">
+<h3 id="org99c3f4c"><span class="section-number-3">3.9</span> return value of the main function</h3>
+<div class="outline-text-3" id="text-3-9">
+<p>
+Should be 0 if success, other for failure
+</p>
+</div>
+</div>
+<div id="outline-container-org771fa02" class="outline-3">
+<h3 id="org771fa02"><span class="section-number-3">3.10</span> what happened in the hello world program</h3>
+<div class="outline-text-3" id="text-3-10">
+<ul class="org-ul">
+<li>c library: `printf()`, `puts()`, `fflush(), all this function will make a system call `write()`
+<ul class="org-ul">
+<li><b>user mode</b></li>
+</ul></li>
+<li>OS kernel: sys<sub>write</sub>()
+<ul class="org-ul">
+<li><b>kernel mode</b> <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></li>
+<li>in the kernel, there is a table indexed by the system call number</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2c64ede" class="outline-3">
+<h3 id="org2c64ede"><span class="section-number-3">3.11</span> kernel space</h3>
+<div class="outline-text-3" id="text-3-11">
+<ul class="org-ul">
+<li>the equivalent of `printf` is `printk`</li>
+<li>running program in the keneral is different from running program in the user space</li>
+<li>to push a module into the kernel, use `sudo insmod hello/hello.ko`</li>
+<li>kernel have the highest priviledge, running on Ring 0</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5d49e0d" class="outline-3">
+<h3 id="org5d49e0d"><span class="section-number-3">3.12</span> types of operating system</h3>
+<div class="outline-text-3" id="text-3-12">
+</div>
+<div id="outline-container-org0c2c099" class="outline-4">
+<h4 id="org0c2c099"><span class="section-number-4">3.12.1</span> Batch Processing Operating Systems</h4>
+<div class="outline-text-4" id="text-3-12-1">
+<ul class="org-ul">
+<li>Characteristics:
+<ul class="org-ul">
+<li>Batch jobs are processed sequentially from a job queue</li>
+<li>Job inputs and outputs are saved in files or printed</li>
+<li>No interaction with the user during the execution of a batch program</li>
+</ul></li>
+<li>Batch processing operating systems were the early form of operating systems.</li>
+<li>Batch processing functions still exist today, for example to execute jobs on super computers.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org448ea51" class="outline-4">
+<h4 id="org448ea51"><span class="section-number-4">3.12.2</span> General Purpose Operating Systems</h4>
+<div class="outline-text-4" id="text-3-12-2">
+<ul class="org-ul">
+<li>Characteristics:
+<ul class="org-ul">
+<li><b>Multiple programs</b> execute simultaneously (multi-programming, multi-tasking)</li>
+<li><b>Multiple users</b> can use the system simultaneously (multi-user)</li>
+<li><b>Processor time is shared</b> between the running processes (time-sharing)</li>
+<li><b>Input/output devices operate concurrently</b> with the processors</li>
+<li>*Network support but no or very limited transparency</li>
+</ul></li>
+<li>Examples:
+<ul class="org-ul">
+<li>Linux, BSD, Solaris</li>
+<li>Windows, MacOS</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd134522" class="outline-4">
+<h4 id="orgd134522"><span class="section-number-4">3.12.3</span> Parallel Operating Systems</h4>
+<div class="outline-text-4" id="text-3-12-3">
+<ul class="org-ul">
+<li>Characteristics:
+<ul class="org-ul">
+<li>Support for a very large number of tightly integrated processors(1000s)</li>
+<li>Symmetrical: Each processor has a full copy of the operating system</li>
+<li>Asymmetrical: Only one processor carries the full operating system, Other processors are operated by a small operating system stub to transfer code and tasks</li>
+</ul></li>
+<li>Massively parallel systems are a niche market and hence parallel operating systems are usually very specific to the hardware design and application area.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6ecf336" class="outline-4">
+<h4 id="org6ecf336"><span class="section-number-4">3.12.4</span> Distributed Operating Systems</h4>
+<div class="outline-text-4" id="text-3-12-4">
+<ul class="org-ul">
+<li>Characteristics:
+<ul class="org-ul">
+<li>Support for a medium number of loosely coupled processors</li>
+<li>Processors execute a small operating system kernel providing essential communication services</li>
+<li>Other operating system services are distributed over available processors</li>
+<li>Services can be replicated in order to improve scalability and availability</li>
+<li>Distribution of tasks and data transparent to users (single system image)</li>
+</ul></li>
+<li>Examples:
+<ul class="org-ul">
+<li>Amoeba (Vrije Universiteit Amsterdam)</li>
+<li>Plan 9 (Bell Labs, AT&amp;T)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbf21801" class="outline-4">
+<h4 id="orgbf21801"><span class="section-number-4">3.12.5</span> Real-time Operating Systems</h4>
+<div class="outline-text-4" id="text-3-12-5">
+<ul class="org-ul">
+<li>Characteristics:
+<ul class="org-ul">
+<li>Predictability</li>
+<li>Logical correctness of the offered services</li>
+<li>Timeliness of the offered services</li>
+<li>Services are to be delivered not too early, not too late</li>
+<li>Operating system executes processes to meet time constraints</li>
+</ul></li>
+<li>Examples:
+<ul class="org-ul">
+<li>QNX</li>
+<li>VxWorks</li>
+<li>RTLinux, RTAI, Xenomai</li>
+<li>Windows CE</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd92725a" class="outline-4">
+<h4 id="orgd92725a"><span class="section-number-4">3.12.6</span> Embedded Operating Systems</h4>
+<div class="outline-text-4" id="text-3-12-6">
+<ul class="org-ul">
+<li>Characteristics:
+<ul class="org-ul">
+<li>Usually real-time systems, sometimes hard real-time systems</li>
+<li>Very small memory footprint (even today!)</li>
+<li>No or limited user interaction</li>
+<li>90-95 % of all processors are running embedded operating systems</li>
+</ul></li>
+<li>Examples:
+<ul class="org-ul">
+<li>Embedded Linux, Embedded BSD</li>
+<li>Symbian OS, Windows Mobile, iPhone OS, BlackBerry OS, Palm OS</li>
+<li>Cisco IOS, JunOS, IronWare, Inferno</li>
+<li>Contiki, TinyOS, RIOT</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org124c8b7" class="outline-3">
+<h3 id="org124c8b7"><span class="section-number-3">3.13</span> evolution of os</h3>
+<div class="outline-text-3" id="text-3-13">
+<ul class="org-ul">
+<li>Vacuum Tubes: no operating system</li>
+<li>Transistors: batch systems automatically process job queues</li>
+<li>Integrated Circuit: Spooling (Simultaneous Peripheral Operation On Line), Multiprogramming and Time-sharing</li>
+<li>VLSI: Personal computer (CP/M, MS-DOS, Windows, Mac OS, Unix), Network operating systems (Unix), Distributed operating systems (Amoeba, Mach, V)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbd417cd" class="outline-3">
+<h3 id="orgbd417cd"><span class="section-number-3">3.14</span> Monolithic and Modular Operating Systems</h3>
+<div class="outline-text-3" id="text-3-14">
+<ul class="org-ul">
+<li>Example: Linux</li>
+<li>Modules can be platform independent</li>
+<li>Easier to maintain and to develop</li>
+<li>Increased reliability / robustness</li>
+<li>All services are in the kernel with the same privilege level</li>
+<li>May reach high efficiency Example: Linux</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9beb71c" class="outline-3">
+<h3 id="org9beb71c"><span class="section-number-3">3.15</span> Monolithic and Layered Operating Systems</h3>
+<div class="outline-text-3" id="text-3-15">
+<ul class="org-ul">
+<li>Easily portable, significantly easier to maintain</li>
+<li>Often reduced efficiency because of the need to go through many layered interfaces</li>
+<li>Rigorous implementation of the stacked virtual machine perspective</li>
+<li>Services offered by the various layers are important for the overall performance</li>
+<li>Example: THE (Dijkstra, 1968)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb21ebbd" class="outline-3">
+<h3 id="orgb21ebbd"><span class="section-number-3">3.16</span> Virtual Machines</h3>
+<div class="outline-text-3" id="text-3-16">
+<ul class="org-ul">
+<li>Virtualization of the hardware</li>
+<li>Multiple operating systems can execute concurrently</li>
+<li>Separation of multi-programming from other operating system services</li>
+<li>Examples: IBM VM/370 (’79), VMware (1990s), XEN (2003)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7eb887b" class="outline-3">
+<h3 id="org7eb887b"><span class="section-number-3">3.17</span> micro kernel</h3>
+<div class="outline-text-3" id="text-3-17">
+<ul class="org-ul">
+<li>bring up the driver, just implement the minimum of a kernel</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org18f50e1" class="outline-2">
+<h2 id="org18f50e1"><span class="section-number-2">4</span> Hardware</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org1de86d6" class="outline-3">
+<h3 id="org1de86d6"><span class="section-number-3">4.1</span> Common Computer Architecture</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>sequencer</li>
+<li>ALU</li>
+<li>Registers</li>
+<li>buses:
+<ul class="org-ul">
+<li>control bus</li>
+<li>address bus</li>
+<li>data bus</li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-org9082999" class="outline-4">
+<h4 id="org9082999"><span class="section-number-4">4.1.1</span> CPU registers</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<ul class="org-ul">
+<li>Typical set of registers:
+<ul class="org-ul">
+<li>Processor status register</li>
+<li>Instruction register (current instruction)</li>
+<li>Program counter (current or next instruction) - Stack pointer (top of stack)</li>
+<li>Special privileged registers</li>
+<li>Dedicated registers</li>
+<li>Universal registers</li>
+</ul></li>
+<li>Privileged registers are only accessible when the processor is in privileged mode</li>
+<li>Switch from non-privileged to privileged mode via traps or interrupts</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org53239aa" class="outline-3">
+<h3 id="org53239aa"><span class="section-number-3">4.2</span> I/O Systems and Interrupts</h3>
+<div class="outline-text-3" id="text-4-2">
+</div>
+<div id="outline-container-orgf6c1ad5" class="outline-4">
+<h4 id="orgf6c1ad5"><span class="section-number-4">4.2.1</span> I/O Devices</h4>
+<div class="outline-text-4" id="text-4-2-1">
+<ul class="org-ul">
+<li>I/O devices are essential for every computer</li>
+<li>Typical classes of I/O devices:
+<ul class="org-ul">
+<li>clocks, timers</li>
+<li>user-interface devices</li>
+<li>document I/O devices (scanner, printer, &#x2026;)   - audio and video equipment</li>
+<li>network interfaces</li>
+<li>mass storage devices</li>
+<li>sensors and actuators in control applications</li>
+</ul></li>
+<li>Device drivers are often the biggest component of general purpose operating system kernels</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org127284d" class="outline-4">
+<h4 id="org127284d"><span class="section-number-4">4.2.2</span> Basic I/O Programming</h4>
+<div class="outline-text-4" id="text-4-2-2">
+<ul class="org-ul">
+<li><b>Status driven</b>: the processor polls an I/O device for information
+<ul class="org-ul">
+<li>Simple but inefficient use of processor cycles</li>
+</ul></li>
+<li><p>
+<b>Interrupt driven</b>: the I/O device issues an interrupt when data is available or an I/O operation has been completed
+</p>
+<ul class="org-ul">
+<li>Program controlled: Interrupts are handled by the processor directly</li>
+<li>Program initiated: Interrupts are handled by a DMA-controller and no processing is performed by the processor (but the DMA transfer might steal some memory access</li>
+</ul>
+<p>
+cycles, potentially slowing down the processor)
+</p>
+<ul class="org-ul">
+<li>Channel program controlled: Interrupts are handled by a dedicated channel device, which is usually itself a micro-processor</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7d6bba0" class="outline-4">
+<h4 id="org7d6bba0"><span class="section-number-4">4.2.3</span> Interrupts</h4>
+<div class="outline-text-4" id="text-4-2-3">
+<ul class="org-ul">
+<li>Interrupts can be triggered by hardware and by software
+<ul class="org-ul">
+<li>clock interrupts</li>
+<li>keyboard</li>
+<li>timer</li>
+</ul></li>
+<li>Interrupt control:
+<ul class="org-ul">
+<li>grouping of interrupts</li>
+<li>encoding of interrupts</li>
+<li>prioritizing interrupts</li>
+<li>enabling / disabling of interrupt sources</li>
+</ul></li>
+<li>Interrupt identification:
+<ul class="org-ul">
+<li>interrupt vectors, interrupt states</li>
+</ul></li>
+<li>Context switching:
+<ul class="org-ul">
+<li>mechanisms for CPU state saving and restoring</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org02a6eda" class="outline-4">
+<h4 id="org02a6eda"><span class="section-number-4">4.2.4</span> Interrupts Servie Routines</h4>
+<div class="outline-text-4" id="text-4-2-4">
+<ul class="org-ul">
+<li>minimal hardware support (supplied by the CPU)
+<ul class="org-ul">
+<li>save essential CPU registers</li>
+<li>jump to the vectorized interrupt servie routine</li>
+<li>restore essential CPU register to return</li>
+</ul></li>
+<li>minimal wrapper (supplied by the OS)
+<ul class="org-ul">
+<li>Save remaining CPU registers</li>
+<li>Save stack-frame</li>
+<li>Execute interrupt service code</li>
+<li>Restore stack-frame</li>
+<li>Restore CPU registers</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org2254afa" class="outline-3">
+<h3 id="org2254afa"><span class="section-number-3">4.3</span> Memory</h3>
+<div class="outline-text-3" id="text-4-3">
+</div>
+<div id="outline-container-org977dc96" class="outline-4">
+<h4 id="org977dc96"><span class="section-number-4">4.3.1</span> memory size and access time</h4>
+<div class="outline-text-4" id="text-4-3-1">
+<ul class="org-ul">
+<li>trade-off between memory speed and memory size
+<ul class="org-ul">
+<li>register is fast, but super small</li>
+<li>L1, L2, L3 cache increases in size, decrease in speed</li>
+<li>main memory, big</li>
+<li>disk</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org56e1cf6" class="outline-4">
+<h4 id="org56e1cf6"><span class="section-number-4">4.3.2</span> memory segments</h4>
+<div class="outline-text-4" id="text-4-3-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption class="t-above"><span class="table-number">Table 1:</span> Different Segments in Memory</caption>
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Segments</th>
+<th scope="col" class="org-left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">text</td>
+<td class="org-left">machine instructions</td>
+</tr>
+
+<tr>
+<td class="org-left">data</td>
+<td class="org-left">static variable and constants, may be further devided into initialized and uninitialized data</td>
+</tr>
+
+<tr>
+<td class="org-left">heap</td>
+<td class="org-left">dynamically allocated data structures</td>
+</tr>
+
+<tr>
+<td class="org-left">stack</td>
+<td class="org-left">automatically allocated local variables, management of function calls</td>
+</tr>
+</tbody>
+</table>
+<ul class="org-ul">
+<li>Memory used by a program is usually partitioned into different segments that serve different purposes and may have different access rights</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0da1b63" class="outline-4">
+<h4 id="org0da1b63"><span class="section-number-4">4.3.3</span> stack frame</h4>
+<div class="outline-text-4" id="text-4-3-3">
+<ul class="org-ul">
+<li>arguments pushed onto the stack in a reverse order</li>
+<li>buttom is arguments for the function calls</li>
+<li>then return address(instruction pointer)</li>
+<li>frame pointer</li>
+<li>stack locals</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge7f24ec" class="outline-4">
+<h4 id="orge7f24ec"><span class="section-number-4">4.3.4</span> stack smashing attack</h4>
+<div class="outline-text-4" id="text-4-3-4">
+<ul class="org-ul">
+<li>unchecked boundry will lead to stack overflow</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9364289" class="outline-4">
+<h4 id="org9364289"><span class="section-number-4">4.3.5</span> caching</h4>
+<div class="outline-text-4" id="text-4-3-5">
+<ul class="org-ul">
+<li>caching is A general technique to speed up memory access by introducing smaller and faster memories which keep a copy of frequently / soon needed data</li>
+<li>cache hit: A memory access which can be served from the cache memory</li>
+<li>cache miss: A memory access which cannot be served from the cache and requires access to slower memory</li>
+<li>cache write through: A memory update which updates the cache entry as well as the slower memory cell</li>
+<li>Delayed write: A memory update which updates the cache entry while the slower memory cell is updated at a later point in time</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3a87779" class="outline-4">
+<h4 id="org3a87779"><span class="section-number-4">4.3.6</span> Locality</h4>
+<div class="outline-text-4" id="text-4-3-6">
+<ul class="org-ul">
+<li>Cache performance is relying on:
+<ul class="org-ul">
+<li>Spatial locality: Nearby memory cells are likely to be accessed soon</li>
+<li>Temporal locality: Recently addressed memory cells are likely to be accessed again soon</li>
+</ul></li>
+<li>Iterative languages generate linear sequences of instructions (spatial locality)</li>
+<li>Functional / declarative languages extensively use recursion (temporal locality)</li>
+<li>CPU time is in general often spend in small loops/iterations (spatial and temporal locality)</li>
+<li>Data structures are organized in compact formats (spatial locality)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org8822622" class="outline-2">
+<h2 id="org8822622"><span class="section-number-2">5</span> Processes and Thread</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org1b88e2a" class="outline-3">
+<h3 id="org1b88e2a"><span class="section-number-3">5.1</span> Fundamental Concepts</h3>
+<div class="outline-text-3" id="text-5-1">
+</div>
+<div id="outline-container-orge752834" class="outline-4">
+<h4 id="orge752834"><span class="section-number-4">5.1.1</span> Separation of Mechanisms and Policies</h4>
+<div class="outline-text-4" id="text-5-1-1">
+<ul class="org-ul">
+<li>An important design principle is the separation of policy from mechanism.</li>
+<li>Mechanisms determine how to do something.</li>
+<li>Policies decide what will be done.</li>
+<li>The separation of policy and mechanism is important for flexibility, especially since policies are likely to change.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga686c85" class="outline-4">
+<h4 id="orga686c85"><span class="section-number-4">5.1.2</span> User Mode</h4>
+<div class="outline-text-4" id="text-5-1-2">
+<ul class="org-ul">
+<li>the processor executes machine instructions of (user space) processes;</li>
+<li>the instruction set of the processor is restricted to the so called unprivileged instruction set;</li>
+<li>the set of accessible registers is restricted to the so called unprivileged register set;</li>
+<li>the memory addresses used by a process are typically mapped to physical memory addresses by a memory management unit;</li>
+<li>direct access to hardware components is protected by using hardware protection where possible;</li>
+<li>direct access to the state of other concurrently running processes is restricted.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org262c123" class="outline-4">
+<h4 id="org262c123"><span class="section-number-4">5.1.3</span> System Mode</h4>
+<div class="outline-text-4" id="text-5-1-3">
+<ul class="org-ul">
+<li>the processor executes machine instructions of the operating system kernel;</li>
+<li>all instructions of the processor can be used, the so called privileged instruction set;</li>
+<li>all registers are accessible, the so called privileged register set;</li>
+<li>direct access to physical memory addresses and the memory address mapping tables is enabled;</li>
+<li>direct access to the hardware components of the system is enableds;</li>
+<li>the direct manipulation of the state of processes is possible.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd257e00" class="outline-4">
+<h4 id="orgd257e00"><span class="section-number-4">5.1.4</span> Entering the Operating System Kernel</h4>
+<div class="outline-text-4" id="text-5-1-4">
+<ul class="org-ul">
+<li>System calls
+<ul class="org-ul">
+<li>Synchronous to the running process</li>
+<li>Parameter transfer via registers, the call stack or a parameter block</li>
+</ul></li>
+<li>Hardware traps
+<ul class="org-ul">
+<li>Synchronous to a running process (devision by zero)</li>
+<li>Forwarded to a process by the operating system</li>
+</ul></li>
+<li>Hardware interrupts
+<ul class="org-ul">
+<li>Asynchronous to the running processes</li>
+<li>Call of an interrupt handler via an interrupt vector</li>
+</ul></li>
+<li>Software interrupts
+<ul class="org-ul">
+<li>Asynchronous to the running processes</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org66a1566" class="outline-3">
+<h3 id="org66a1566"><span class="section-number-3">5.2</span> Processes</h3>
+<div class="outline-text-3" id="text-5-2">
+</div>
+<div id="outline-container-orgb6e4c9a" class="outline-4">
+<h4 id="orgb6e4c9a"><span class="section-number-4">5.2.1</span> Characteristics</h4>
+<div class="outline-text-4" id="text-5-2-1">
+<ul class="org-ul">
+<li>an instance of a program under execution</li>
+<li>A process uses/owns resources (CPU, memory, file) and is charactererized by the following:
+<ol class="org-ol">
+<li>A sequence of machine instructions which determines the behavior of the running program (control flow)</li>
+<li>The current state of the process given by the content of the processor’s registers, the contents of the stack, and the contents of the heap (internal state)</li>
+<li>The state of other resources (e.g., open files or network connections, timer, devices) used by the running program (external state)</li>
+</ol></li>
+<li>Processes are sometimes also called tasks.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org465ea77" class="outline-4">
+<h4 id="org465ea77"><span class="section-number-4">5.2.2</span> State Machine View of Processes</h4>
+<div class="outline-text-4" id="text-5-2-2">
+<ul class="org-ul">
+<li>new: just created</li>
+<li>ready: ready to running</li>
+<li>running: executing</li>
+<li>blocked: not ready to run, wait for resources</li>
+<li>terminated: just finished, not yet removed</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgdce50f3" class="outline-4">
+<h4 id="orgdce50f3"><span class="section-number-4">5.2.3</span> Queueing Model View of Processes</h4>
+<div class="outline-text-4" id="text-5-2-3">
+<ul class="org-ul">
+<li>Processes are enqueued if resources are not readily available or if processes wait for events</li>
+<li>Dequeuing strategies have strong performance impact</li>
+<li>Queueing models can be used for performance analysis</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org03c6a80" class="outline-4">
+<h4 id="org03c6a80"><span class="section-number-4">5.2.4</span> Process Control Block</h4>
+<div class="outline-text-4" id="text-5-2-4">
+<ul class="org-ul">
+<li>process are internally represented by a process control block (PCB)
+<ul class="org-ul">
+<li>process identification</li>
+<li>process state</li>
+<li>saved registers during context switches</li>
+<li>scheduling information</li>
+<li>assigned memory regions</li>
+<li>open files or network connections</li>
+<li>accounting info (# of CPU cycles, IO operations)</li>
+<li>pointers to other PCBs</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org831af3b" class="outline-4">
+<h4 id="org831af3b"><span class="section-number-4">5.2.5</span> Process Lists</h4>
+<div class="outline-text-4" id="text-5-2-5">
+<ul class="org-ul">
+<li>PCBs are often organized in doubly-linked lists or tables</li>
+<li>can be queued by pointer operations</li>
+<li>run queue length of the CUP is a good load indicator</li>
+<li>The system load often defined as the exponentially smoothed average of the run queue length over 1, 5 and 15 minutes
+<ul class="org-ul">
+<li>usually count when there is a interrupt</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org7567109" class="outline-4">
+<h4 id="org7567109"><span class="section-number-4">5.2.6</span> Process Creation</h4>
+<div class="outline-text-4" id="text-5-2-6">
+<ul class="org-ul">
+<li>The fork() system call creates a new child process
+<ul class="org-ul">
+<li>fork will tell you if you are child process / parent process / failed</li>
+<li>which is an exact copy of the parent process</li>
+<li>except that the result of the system call differs</li>
+</ul></li>
+<li>exec() system call replaces the current process image with a new process image</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org635e189" class="outline-4">
+<h4 id="org635e189"><span class="section-number-4">5.2.7</span> Process Tree</h4>
+<div class="outline-text-4" id="text-5-2-7">
+<ul class="org-ul">
+<li>the first process is created when the system is initialized (init / systemd)</li>
+<li>All other processes are created using fork(), which leads to a process tree</li>
+<li>PCBs often contain pointers to parent PCBs</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgecb81fe" class="outline-4">
+<h4 id="orgecb81fe"><span class="section-number-4">5.2.8</span> Process Termination</h4>
+<div class="outline-text-4" id="text-5-2-8">
+<ul class="org-ul">
+<li>Processes can terminate themself by calling exit()</li>
+<li>The wait() system call allows processes to wait for the termination of a child process
+<ul class="org-ul">
+<li>if you the parent exit() before the child parent, the init.d will take up the child and retrieve the number</li>
+</ul></li>
+<li>Terminating processes return a numeric result code</li>
+<li>shell application:
+<ul class="org-ul">
+<li>first fork</li>
+<li>in the child we execute the operation</li>
+<li>and the parent wait() for the child</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga377330" class="outline-4">
+<h4 id="orga377330"><span class="section-number-4">5.2.9</span> POSIX API (fork, exec)</h4>
+<div class="outline-text-4" id="text-5-2-9">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #bc6ec5;">#include</span> <span style="color: #4f97d7;">&lt;</span><span style="color: #2d9574;">unistd.h</span><span style="color: #4f97d7;">&gt;</span>
+<span style="color: #ce537a; font-weight: bold;">pid_t</span> <span style="color: #bc6ec5; font-weight: bold;">getpid</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">never fail</span>
+<span style="color: #ce537a; font-weight: bold;">pid_t</span> <span style="color: #bc6ec5; font-weight: bold;">getppid</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">always have a parent, never fail</span>
+<span style="color: #ce537a; font-weight: bold;">pid_t</span> <span style="color: #bc6ec5; font-weight: bold;">fork</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">can fail</span>
+<span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">copying memory is relately fast. You just copy it conceptually.</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">execve</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #ce537a; font-weight: bold;">char</span>  *<span style="color: #7590db;">filename</span>, <span style="color: #ce537a; font-weight: bold;">char</span> *<span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #7590db;">argv</span> <span style="color: #bc6ec5;">[]</span>,
+           <span style="color: #ce537a; font-weight: bold;">char</span> *<span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #7590db;">envp</span><span style="color: #bc6ec5;">[]</span><span style="color: #4f97d7;">)</span>;
+<span style="color: #4f97d7; font-weight: bold; font-style: italic;">extern</span> <span style="color: #ce537a; font-weight: bold;">char</span> **<span style="color: #7590db;">environ</span>;
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">execl</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #ce537a; font-weight: bold;">char</span> *<span style="color: #7590db;">path</span>, <span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #ce537a; font-weight: bold;">char</span> *<span style="color: #7590db;">arg</span>, ...<span style="color: #4f97d7;">)</span>;
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">execlp</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #ce537a; font-weight: bold;">char</span> *<span style="color: #7590db;">file</span>, <span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #ce537a; font-weight: bold;">char</span> *<span style="color: #7590db;">arg</span>, ...<span style="color: #4f97d7;">)</span>;
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">execle</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span>  <span style="color: #ce537a; font-weight: bold;">char</span>  *<span style="color: #7590db;">path</span>,  <span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span>  <span style="color: #ce537a; font-weight: bold;">char</span>  *<span style="color: #7590db;">arg</span>, ...,
+           <span style="color: #ce537a; font-weight: bold;">char</span> * <span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #7590db;">envp</span><span style="color: #bc6ec5;">[]</span><span style="color: #4f97d7;">)</span>;
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">execv</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #ce537a; font-weight: bold;">char</span> *<span style="color: #7590db;">path</span>, <span style="color: #ce537a; font-weight: bold;">char</span> *<span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #7590db;">argv</span><span style="color: #bc6ec5;">[]</span><span style="color: #4f97d7;">)</span>;
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">execvp</span><span style="color: #4f97d7;">(</span><span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #ce537a; font-weight: bold;">char</span> *<span style="color: #7590db;">file</span>, <span style="color: #ce537a; font-weight: bold;">char</span> *<span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #7590db;">argv</span><span style="color: #bc6ec5;">[]</span><span style="color: #4f97d7;">)</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdbf8324" class="outline-4">
+<h4 id="orgdbf8324"><span class="section-number-4">5.2.10</span> POSIX API (wait, exit)</h4>
+<div class="outline-text-4" id="text-5-2-10">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #bc6ec5;">#include</span> <span style="color: #4f97d7;">&lt;</span><span style="color: #2d9574;">stdlib.h</span><span style="color: #4f97d7;">&gt;</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">exit</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">status</span><span style="color: #4f97d7;">)</span>; 
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">atexit</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5;">(</span>*<span style="color: #bc6ec5; font-weight: bold;">function</span><span style="color: #bc6ec5;">)(</span><span style="color: #ce537a; font-weight: bold;">void</span><span style="color: #bc6ec5;">)</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">you can register a function that will be execute when exit, a handler or a hook</span>
+<span style="color: #bc6ec5;">#include</span> <span style="color: #4f97d7;">&lt;</span><span style="color: #2d9574;">unistd.h</span><span style="color: #4f97d7;">&gt;</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">_exit</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">status</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">not calling any at exit handler</span>
+<span style="color: #ce537a; font-weight: bold;">pid_t</span> <span style="color: #bc6ec5; font-weight: bold;">wait</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">int</span> *<span style="color: #7590db;">status</span><span style="color: #4f97d7;">)</span>;
+<span style="color: #ce537a; font-weight: bold;">pid_t</span> <span style="color: #bc6ec5; font-weight: bold;">waitpid</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">pid_t</span> <span style="color: #7590db;">pid</span>, <span style="color: #ce537a; font-weight: bold;">int</span> *<span style="color: #7590db;">status</span>, <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">options</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">wait for a process</span>
+<span style="color: #2aa1ae; background-color: #292e34;">/*</span>
+<span style="color: #2aa1ae; background-color: #292e34;">A state change is considered to be: the</span>
+<span style="color: #2aa1ae; background-color: #292e34;">       child terminated; the child was stopped by a signal; or the child was</span>
+<span style="color: #2aa1ae; background-color: #292e34;">       resumed by a signal.  In the case of a terminated child, performing a</span>
+<span style="color: #2aa1ae; background-color: #292e34;">       wait allows the system to release the resources associated with the</span>
+<span style="color: #2aa1ae; background-color: #292e34;">       child; if a wait is not performed, then the terminated child remains</span>
+<span style="color: #2aa1ae; background-color: #292e34;">       in a "zombie" state (see NOTES below).</span>
+<span style="color: #2aa1ae; background-color: #292e34;">*/</span>
+<span style="color: #bc6ec5;">#include</span> <span style="color: #4f97d7;">&lt;</span><span style="color: #2d9574;">sys/time.h</span><span style="color: #4f97d7;">&gt;</span>
+<span style="color: #bc6ec5;">#include</span> <span style="color: #4f97d7;">&lt;</span><span style="color: #2d9574;">sys/resource.h</span><span style="color: #4f97d7;">&gt;</span>
+<span style="color: #bc6ec5;">#include</span> <span style="color: #4f97d7;">&lt;</span><span style="color: #2d9574;">sys/wait.h</span><span style="color: #4f97d7;">&gt;</span>
+<span style="color: #ce537a; font-weight: bold;">pid_t</span> <span style="color: #bc6ec5; font-weight: bold;">wait3</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">int</span> *<span style="color: #7590db;">status</span>, <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">options</span>, <span style="color: #4f97d7; font-weight: bold; font-style: italic;">struct</span> <span style="color: #ce537a; font-weight: bold;">rusage</span> *<span style="color: #7590db;">rusage</span><span style="color: #4f97d7;">)</span>;
+<span style="color: #ce537a; font-weight: bold;">pid_t</span> <span style="color: #bc6ec5; font-weight: bold;">wait4</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">pid_t</span> <span style="color: #7590db;">pid</span>, <span style="color: #ce537a; font-weight: bold;">int</span> *<span style="color: #7590db;">status</span>, <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">options</span>, <span style="color: #4f97d7; font-weight: bold; font-style: italic;">struct</span> <span style="color: #ce537a; font-weight: bold;">rusage</span> *<span style="color: #7590db;">rusage</span><span style="color: #4f97d7;">)</span>;
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcd3fcc0" class="outline-4">
+<h4 id="orgcd3fcc0"><span class="section-number-4">5.2.11</span> Sketch of a Command Interpreter: REPL</h4>
+<div class="outline-text-4" id="text-5-2-11">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #4f97d7; font-weight: bold; font-style: italic;">while</span> <span style="color: #4f97d7;">(</span><span style="color: #a45bad;">1</span><span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+    show_prompt<span style="color: #bc6ec5;">()</span>;
+    read_command<span style="color: #bc6ec5;">()</span>;
+    pid = fork<span style="color: #bc6ec5;">()</span>;
+    <span style="color: #4f97d7; font-weight: bold; font-style: italic;">if</span> <span style="color: #bc6ec5;">(</span>pid &lt; <span style="color: #a45bad;">0</span><span style="color: #bc6ec5;">)</span> <span style="color: #bc6ec5;">{</span>
+        perror<span style="color: #2d9574;">(</span><span style="color: #2d9574;">"fork"</span><span style="color: #2d9574;">)</span>;
+        <span style="color: #4f97d7; font-weight: bold; font-style: italic;">continue</span>;
+    <span style="color: #bc6ec5;">}</span>
+    <span style="color: #4f97d7; font-weight: bold; font-style: italic;">if</span> <span style="color: #bc6ec5;">(</span>pid != <span style="color: #a45bad;">0</span><span style="color: #bc6ec5;">)</span> <span style="color: #bc6ec5;">{</span>
+        waitpid<span style="color: #2d9574;">(</span>pid, &amp;status, <span style="color: #a45bad;">0</span><span style="color: #2d9574;">)</span>;
+    <span style="color: #bc6ec5;">}</span> <span style="color: #4f97d7; font-weight: bold; font-style: italic;">else</span> <span style="color: #bc6ec5;">{</span>
+        execvp<span style="color: #2d9574;">(</span>args<span style="color: #67b11d;">[</span><span style="color: #a45bad;">0</span><span style="color: #67b11d;">]</span>, args, <span style="color: #a45bad;">0</span><span style="color: #2d9574;">)</span>;
+        perror<span style="color: #2d9574;">(</span><span style="color: #2d9574;">"execvp"</span><span style="color: #2d9574;">)</span>;
+        _exit<span style="color: #2d9574;">(</span><span style="color: #a45bad;">1</span><span style="color: #2d9574;">)</span>;
+    <span style="color: #bc6ec5;">}</span>
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8102eec" class="outline-4">
+<h4 id="org8102eec"><span class="section-number-4">5.2.12</span> Context Switch</h4>
+<div class="outline-text-4" id="text-5-2-12">
+<ul class="org-ul">
+<li>Save the <b>state</b> of the running process/thread<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></li>
+<li>Reload the state of the next running process/thread</li>
+<li>Context switch overhead is an important operating system performance metric</li>
+<li>Switching processes can be expensive if memory must be reloaded</li>
+<li>preferable to continue a process or thrad o the same CPU</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd07510d" class="outline-4">
+<h4 id="orgd07510d"><span class="section-number-4">5.2.13</span> vfork()</h4>
+<div class="outline-text-4" id="text-5-2-13">
+<ul class="org-ul">
+<li>the intent of vfork was to eliminate the overhead of copying the whole process image if you only want to do an exec* in the child.</li>
+<li>Because exec* replaces the whole image of the child process, there is no point in copying the image of the parent.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org9ae9b35" class="outline-3">
+<h3 id="org9ae9b35"><span class="section-number-3">5.3</span> Threads</h3>
+<div class="outline-text-3" id="text-5-3">
+<ul class="org-ul">
+<li>pthread is the POSIX thread, the new standard</li>
+</ul>
+</div>
+<div id="outline-container-orgefbb0ed" class="outline-4">
+<h4 id="orgefbb0ed"><span class="section-number-4">5.3.1</span> What is threads</h4>
+<div class="outline-text-4" id="text-5-3-1">
+<ul class="org-ul">
+<li>threads are individual control flows, typically within a process (or within a kernel)</li>
+<li>Every thread has its own private stack (so that function calls can be managed for each thred separatedly)</li>
+<li>Multiple threads share the same address space and other resources
+<ul class="org-ul">
+<li>Fast communication between threads</li>
+<li>Fast context switching between threads (no switching of memory images)</li>
+<li>Often used for very scalable server programs</li>
+<li>Multiple CPUs can be used by a single process</li>
+<li>Threads require synchronization (see later)</li>
+</ul></li>
+<li>Some operating systems provide thread support in the kernel while others implement threads in user space</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8349995" class="outline-4">
+<h4 id="org8349995"><span class="section-number-4">5.3.2</span> POSIX thread API</h4>
+<div class="outline-text-4" id="text-5-3-2">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #bc6ec5;">#include</span> <span style="color: #4f97d7;">&lt;</span><span style="color: #2d9574;">pthread.h</span><span style="color: #4f97d7;">&gt;</span>
+<span style="color: #4f97d7; font-weight: bold; font-style: italic;">typedef</span> ... pthread_t;
+<span style="color: #4f97d7; font-weight: bold; font-style: italic;">typedef</span> ... pthread_attr_t;
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">pthread_create</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">pthread_t</span> *<span style="color: #7590db;">thread</span>,
+                   <span style="color: #ce537a; font-weight: bold;">pthread_attr_t</span> *<span style="color: #7590db;">attr</span>,
+                   <span style="color: #ce537a; font-weight: bold;">void</span> * <span style="color: #bc6ec5;">(</span>*<span style="color: #bc6ec5; font-weight: bold;">start</span><span style="color: #bc6ec5;">)</span> <span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">void</span> *<span style="color: #bc6ec5;">)</span>, <span style="color: #2aa1ae; background-color: #292e34;">//</span><span style="color: #2aa1ae; background-color: #292e34;">execution point</span>
+                   <span style="color: #ce537a; font-weight: bold;">void</span> *<span style="color: #7590db;">arg</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">a simple arguments</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">pthread_exit</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span> *<span style="color: #7590db;">retval</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">The pthread_exit() function terminates the calling thread and returns a value via retval</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">pthread_cancel</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">pthread_t</span> <span style="color: #7590db;">thread</span><span style="color: #4f97d7;">)</span>;
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">pthread_join</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">pthread_t</span> <span style="color: #7590db;">thread</span>, <span style="color: #ce537a; font-weight: bold;">void</span> **<span style="color: #7590db;">retvalp</span><span style="color: #4f97d7;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">block current thread until the target thread terminates</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">pthread_cleanup_push</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5;">(</span>*<span style="color: #bc6ec5; font-weight: bold;">func</span><span style="color: #bc6ec5;">)(</span><span style="color: #ce537a; font-weight: bold;">void</span> *<span style="color: #bc6ec5;">)</span>, <span style="color: #ce537a; font-weight: bold;">void</span> *<span style="color: #7590db;">arg</span><span style="color: #4f97d7;">)</span>
+<span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #bc6ec5; font-weight: bold;">pthread_cleanup_pop</span><span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">execute</span><span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf4ecc0f" class="outline-4">
+<h4 id="orgf4ecc0f"><span class="section-number-4">5.3.3</span> process and thread in Linux</h4>
+<div class="outline-text-4" id="text-5-3-3">
+<ul class="org-ul">
+<li>Linux internally treats processes and threads as so called tasks</li>
+<li>Linux distinguishes three different types of tasks:
+<ol class="org-ol">
+<li>idle tasks (also called idle threads)</li>
+<li>kernel tasks (also called kernel threads)</li>
+<li>user tasks</li>
+</ol></li>
+<li>Tasks are in one of the states running, interruptible, uninterruptible, stopped, zombie, or dead</li>
+<li>A special clone() system call is used to create processes and threads</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org546d75d" class="outline-4">
+<h4 id="org546d75d"><span class="section-number-4">5.3.4</span> process and thread in Linux</h4>
+<div class="outline-text-4" id="text-5-3-4">
+<ul class="org-ul">
+<li>Linux tasks (processes) are represented by a struct task struct defined in &lt;linux/sched.h&gt;</li>
+<li>Tasks are organized in a circular, doubly-linked list with an additional hashtable, hashed by process id (pid)</li>
+<li>Non-modifying access to the task list requires the usage of the tasklist lock for READ</li>
+<li>Modifying access to the task list requires the usage the tasklist lock for WRITE</li>
+<li>System calls are identified by a number</li>
+<li>The sys call table contains pointers to functions implementing the system calls</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org692d580" class="outline-2">
+<h2 id="org692d580"><span class="section-number-2">6</span> Synchronization</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-org6361e5a" class="outline-3">
+<h3 id="org6361e5a"><span class="section-number-3">6.1</span> Why threads?</h3>
+<div class="outline-text-3" id="text-6-1">
+<ul class="org-ul">
+<li>utilize the multi-core usage</li>
+<li>if there is little computation and throtted by IO operations, multithreaded program might be slower.</li>
+<li>non-blocking IO might be faster on a single thread</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8040ca2" class="outline-3">
+<h3 id="org8040ca2"><span class="section-number-3">6.2</span> Race Conditions and Critical Sections</h3>
+<div class="outline-text-3" id="text-6-2">
+</div>
+<div id="outline-container-org4693297" class="outline-4">
+<h4 id="org4693297"><span class="section-number-4">6.2.1</span> Race conditions</h4>
+<div class="outline-text-4" id="text-6-2-1">
+<p>
+A race condition exists if the result produced by concurrent processes (or threads),
+which access and manipulate shared resources (variables),
+depends unexpectedly on the order of the execution of the processes (or threads).
+</p>
+<ul class="org-ul">
+<li>Protection against race conditions is a very important issue within operating system kernels, but equally well in</li>
+</ul>
+<p>
+many application programs
+</p>
+<ul class="org-ul">
+<li>Protection against race condition is difficult to test</li>
+<li>High-level programming constructs move the generation of correct low-level protection into the compiler</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org21b3e48" class="outline-4">
+<h4 id="org21b3e48"><span class="section-number-4">6.2.2</span> Bounded Buffer Program</h4>
+<div class="outline-text-4" id="text-6-2-2">
+<ul class="org-ul">
+<li>Two processes share a common fixed-size buffer</li>
+<li>The producer process puts data into the buffer</li>
+<li>The consumer process reads data out of the buffer</li>
+<li>The producer must wait if the buffer is full</li>
+<li>The consumer must wait if the buffer is empty</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">producer</span><span style="color: #4f97d7;">(){</span>
+  produce<span style="color: #bc6ec5;">(</span>&amp;item<span style="color: #bc6ec5;">)</span>;
+  <span style="color: #4f97d7; font-weight: bold; font-style: italic;">while</span> <span style="color: #bc6ec5;">(</span>count == N<span style="color: #bc6ec5;">)</span> sleep<span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">1</span><span style="color: #bc6ec5;">)</span>;
+  buffer<span style="color: #bc6ec5;">[</span>in<span style="color: #bc6ec5;">]</span> = item;
+  in=<span style="color: #bc6ec5;">(</span>in+<span style="color: #a45bad;">1</span><span style="color: #bc6ec5;">)</span>%N;
+  count = count + <span style="color: #a45bad;">1</span>;
+<span style="color: #4f97d7;">}</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">consumer</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span>
+  <span style="color: #4f97d7; font-weight: bold; font-style: italic;">while</span> <span style="color: #bc6ec5;">(</span>count == <span style="color: #a45bad;">0</span><span style="color: #bc6ec5;">)</span> sleep<span style="color: #bc6ec5;">(</span><span style="color: #a45bad;">1</span><span style="color: #bc6ec5;">)</span>; 
+  item = buffer<span style="color: #bc6ec5;">[</span>out<span style="color: #bc6ec5;">]</span>; 
+  out=<span style="color: #bc6ec5;">(</span>out+<span style="color: #a45bad;">1</span><span style="color: #bc6ec5;">)</span>%N;
+  count = count - <span style="color: #a45bad;">1</span>;
+  consume<span style="color: #bc6ec5;">(</span>item<span style="color: #bc6ec5;">)</span>;
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+<p>
+It leads to race condition. The value will read first, then change the value, and then assign the value back.
+In between the read and write, other threads might change the value, leading to undefined behavior of the program.
+</p>
+<ul class="org-ul">
+<li>Every situation, in which multiple processes (threads) manipulate shared resources, can lead to race conditions</li>
+<li>Synchronization mechanisms are always needed to coordinate access to shared resources</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9a1c87d" class="outline-4">
+<h4 id="org9a1c87d"><span class="section-number-4">6.2.3</span> Critical Sections</h4>
+<div class="outline-text-4" id="text-6-2-3">
+<ul class="org-ul">
+<li>a critical section is a segment of code that can only be executed by one process at a time</li>
+<li>The execution of critical sections by multiple processes is mutually exclusive in time</li>
+<li>Entry and exit sections must protect critical sections</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org49459e9" class="outline-4">
+<h4 id="org49459e9"><span class="section-number-4">6.2.4</span> Critical Section Problem</h4>
+<div class="outline-text-4" id="text-6-2-4">
+<ul class="org-ul">
+<li>to design a protocol that the processes can use to cooperate</li>
+<li>A solution must satisfy the following requirements
+<ul class="org-ul">
+<li>mutual exclusion: No two processes may be simultaneously inside the same critical section.</li>
+<li>Progress: No process outside its critical sections may block other processes.</li>
+<li>Bounded-Waiting: No process should have to wait forever to enter its critical section.</li>
+</ul></li>
+<li>General solutions are not allowed to make assumptions about execution speeds or the number of CPUs present in a system.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org0082b5e" class="outline-3">
+<h3 id="org0082b5e"><span class="section-number-3">6.3</span> Sychronization Mechanisms</h3>
+<div class="outline-text-3" id="text-6-3">
+</div>
+<div id="outline-container-org63d9f5a" class="outline-4">
+<h4 id="org63d9f5a"><span class="section-number-4">6.3.1</span> Disabling Interrupts</h4>
+<div class="outline-text-4" id="text-6-3-1">
+<ul class="org-ul">
+<li>The simplest solution is to disable all interrupts during the critical section so that nothing can interrupt the critical section</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #bc6ec5; font-weight: bold;">disable_interrupts</span><span style="color: #4f97d7;">()</span>;
+<span style="color: #bc6ec5; font-weight: bold;">critical_section</span><span style="color: #4f97d7;">()</span>;
+<span style="color: #bc6ec5; font-weight: bold;">enable_interrupts</span><span style="color: #4f97d7;">()</span>;
+</pre>
+</div>
+<ul class="org-ul">
+<li>Can usually not be used in user-space</li>
+<li>Problematic on systems with multiple processors</li>
+<li>Fails if interrupts are needed in the critical section</li>
+<li>Very efficient and sometimes used in some special cases</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6166e3a" class="outline-4">
+<h4 id="org6166e3a"><span class="section-number-4">6.3.2</span> Strict Alternation</h4>
+<div class="outline-text-4" id="text-6-3-2">
+<ul class="org-ul">
+<li>Lets assume just two processes which share a variable called turn which holds the values 0 and 1</li>
+<li>Ensures mutual exclusion</li>
+<li>Can be extended to handle alternation between N processes</li>
+<li>Does not satisfy the progress requirement since the solution enforces strict alternation</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8772148" class="outline-4">
+<h4 id="org8772148"><span class="section-number-4">6.3.3</span> Peterson’s Algorithm</h4>
+<div class="outline-text-4" id="text-6-3-3">
+<ul class="org-ul">
+<li>Lets assume two processes i and j sharing a variable turn (which holds a process identifier) and a boolean array interested, indexed by process identifiers</li>
+<li>Modifications of turn (and interested) are protected by a loop to handle concurrency issues</li>
+<li>Algorithm satisfies mutual exclusion, progress and bounded-waiting requirements and can be extended to handle N processes</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4d34909" class="outline-4">
+<h4 id="org4d34909"><span class="section-number-4">6.3.4</span> Spin-Locks</h4>
+<div class="outline-text-4" id="text-6-3-4">
+<ul class="org-ul">
+<li>So called spin-locks are locks which cause the processor to spin while waiting for the lock</li>
+<li>Spin-locks are often used to synchronize multi-processor systems with shared memory</li>
+<li>Spin-locks require atomic test-and-set-lock machine instructions on shared memory cells</li>
+<li>Reentrant locks do not harm if you already hold a lock</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf7d285b" class="outline-4">
+<h4 id="orgf7d285b"><span class="section-number-4">6.3.5</span> Critique of Spin-Locks</h4>
+<div class="outline-text-4" id="text-6-3-5">
+<ul class="org-ul">
+<li>Busy waiting potentially wastes processor cycles</li>
+<li>Busy waiting can lead to priority inversion
+<ul class="org-ul">
+<li>Consider processes with high and low priority</li>
+<li>Processes with high priority are preferred over processes with lower priority by the scheduler</li>
+<li>Once a low priority process enters a critical section, processes with high priority will be slowed down more or less to the low priority</li>
+<li>Depending on the scheduler, complete starvation is possible</li>
+</ul></li>
+<li>Find alternatives which do not require busy waiting</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org1585b35" class="outline-3">
+<h3 id="org1585b35"><span class="section-number-3">6.4</span> Semaphores</h3>
+<div class="outline-text-3" id="text-6-4">
+</div>
+<div id="outline-container-org2710fc5" class="outline-4">
+<h4 id="org2710fc5"><span class="section-number-4">6.4.1</span> What is Semaphores?</h4>
+<div class="outline-text-4" id="text-6-4-1">
+<ul class="org-ul">
+<li>A semaphore is a protected integer variable which can only be manipulated by the atomic operations up() and down()</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #bc6ec5; font-weight: bold;">down</span><span style="color: #4f97d7;">(</span>s<span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+  s = s - <span style="color: #a45bad;">1</span>;
+  <span style="color: #4f97d7; font-weight: bold; font-style: italic;">if</span> <span style="color: #bc6ec5;">(</span>s &lt; <span style="color: #a45bad;">0</span><span style="color: #bc6ec5;">)</span> queue_this_process_and_block<span style="color: #bc6ec5;">()</span>;
+<span style="color: #4f97d7;">}</span>
+<span style="color: #bc6ec5; font-weight: bold;">up</span><span style="color: #4f97d7;">(</span>s<span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+  s = s + <span style="color: #a45bad;">1</span>;
+  <span style="color: #4f97d7; font-weight: bold; font-style: italic;">if</span> <span style="color: #bc6ec5;">(</span>s &lt;= <span style="color: #a45bad;">0</span><span style="color: #bc6ec5;">)</span> dequeue_and_wakeup_process<span style="color: #bc6ec5;">()</span>;
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>Dijkstra called the operations P() and V(), other popular names are wait() and signal()</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org025dd0c" class="outline-4">
+<h4 id="org025dd0c"><span class="section-number-4">6.4.2</span> Critical Sections and Semaphores</h4>
+<div class="outline-text-4" id="text-6-4-2">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ce537a; font-weight: bold;">semaphore</span> <span style="color: #7590db;">mutex</span> = <span style="color: #a45bad;">1</span>;
+<span style="color: #bc6ec5; font-weight: bold;">uncritical_section</span><span style="color: #4f97d7;">()</span>;
+down<span style="color: #4f97d7;">(</span>&amp;mutex<span style="color: #4f97d7;">)</span>;
+<span style="color: #bc6ec5; font-weight: bold;">critical_section</span><span style="color: #4f97d7;">()</span>;
+up<span style="color: #4f97d7;">(</span>&amp;mutex<span style="color: #4f97d7;">)</span>;
+<span style="color: #bc6ec5; font-weight: bold;">uncritical_section</span><span style="color: #4f97d7;">()</span>;
+</pre>
+</div>
+<ul class="org-ul">
+<li>Rule of thumb: Every access to a shared data object must be protected by a mutex semaphore for the shared data object as shown above</li>
+<li>However, some synchronization problems require more creative usage</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6a63695" class="outline-4">
+<h4 id="org6a63695"><span class="section-number-4">6.4.3</span> Bounded Buffer with Semaphores</h4>
+<div class="outline-text-4" id="text-6-4-3">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #4f97d7; font-weight: bold; font-style: italic;">const</span> <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">N</span>;
+shared <span style="color: #ce537a; font-weight: bold;">item_t</span> <span style="color: #7590db;">buffer</span><span style="color: #4f97d7;">[</span>N<span style="color: #4f97d7;">]</span>;
+<span style="color: #ce537a; font-weight: bold;">semaphore</span> <span style="color: #7590db;">mutex</span> = <span style="color: #a45bad;">1</span>, <span style="color: #7590db;">empty</span> = N, <span style="color: #7590db;">full</span> = <span style="color: #a45bad;">0</span>;
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">producer</span><span style="color: #4f97d7;">(){</span>
+  produce<span style="color: #bc6ec5;">(</span>&amp;item<span style="color: #bc6ec5;">)</span>;
+  down<span style="color: #bc6ec5;">(</span>&amp;empty<span style="color: #bc6ec5;">)</span>;
+  down<span style="color: #bc6ec5;">(</span>&amp;mutex<span style="color: #bc6ec5;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">it matters</span>
+  buffer<span style="color: #bc6ec5;">[</span>in<span style="color: #bc6ec5;">]</span> = item;
+  in = <span style="color: #bc6ec5;">(</span>in + <span style="color: #a45bad;">1</span><span style="color: #bc6ec5;">)</span> % N;
+  up<span style="color: #bc6ec5;">(</span>&amp;mutex<span style="color: #bc6ec5;">)</span>;
+  up<span style="color: #bc6ec5;">(</span>&amp;full<span style="color: #bc6ec5;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">doesn't matter</span>
+<span style="color: #4f97d7;">}</span>
+
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">consumer</span><span style="color: #4f97d7;">(){</span>
+  down<span style="color: #bc6ec5;">(</span>&amp;full<span style="color: #bc6ec5;">)</span>;
+  down<span style="color: #bc6ec5;">(</span>&amp;mutex<span style="color: #bc6ec5;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">it matters</span>
+  item = buffer<span style="color: #bc6ec5;">[</span>out<span style="color: #bc6ec5;">]</span>;
+  out = <span style="color: #bc6ec5;">(</span>out + <span style="color: #a45bad;">1</span><span style="color: #bc6ec5;">)</span> % N;
+  up<span style="color: #bc6ec5;">(</span>&amp;mutex<span style="color: #bc6ec5;">)</span>;
+  up<span style="color: #bc6ec5;">(</span>&amp;empty<span style="color: #bc6ec5;">)</span>;
+  consume<span style="color: #bc6ec5;">(</span>&amp;item<span style="color: #bc6ec5;">)</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">doesn't matter</span>
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2262e05" class="outline-4">
+<h4 id="org2262e05"><span class="section-number-4">6.4.4</span> Readers / Writers Problem</h4>
+<div class="outline-text-4" id="text-6-4-4">
+<ul class="org-ul">
+<li>A data object is to be shared among several concurrent processes</li>
+<li>Multiple processes (the readers) should be able to read the shared data object simultaneously</li>
+<li>Processes that modify the shared data object (the writers) may only do so if no other process (reader or writer) accesses the shared data object</li>
+<li>Several variations exist, mainly distinguishing whether either reader or writers gain preferred access
+<ul class="org-ul">
+<li>Starvation can occur in many solutions and is not taken into account here</li>
+</ul></li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c">shared <span style="color: #ce537a; font-weight: bold;">object</span> <span style="color: #7590db;">data</span>;
+shared <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">readcount</span> = <span style="color: #a45bad;">0</span>;
+<span style="color: #ce537a; font-weight: bold;">semaphore</span> <span style="color: #7590db;">mutex</span> = <span style="color: #a45bad;">1</span>, <span style="color: #7590db;">writer</span> = <span style="color: #a45bad;">1</span>;
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">writer</span><span style="color: #4f97d7;">(){</span>
+  down<span style="color: #bc6ec5;">(</span>&amp;mutex<span style="color: #bc6ec5;">)</span>;
+  readcount++;
+  <span style="color: #4f97d7; font-weight: bold; font-style: italic;">if</span><span style="color: #bc6ec5;">(</span> readcount == <span style="color: #a45bad;">1</span><span style="color: #bc6ec5;">)</span> down<span style="color: #bc6ec5;">(</span>&amp;writer<span style="color: #bc6ec5;">)</span>;
+  up<span style="color: #bc6ec5;">(</span>&amp;mutex<span style="color: #bc6ec5;">)</span>;
+  read_shared_obj<span style="color: #bc6ec5;">(</span>&amp;data<span style="color: #bc6ec5;">)</span>;
+  down<span style="color: #bc6ec5;">(</span>&amp;mutex<span style="color: #bc6ec5;">)</span>;
+  readcount = readcount - <span style="color: #a45bad;">1</span>;
+  <span style="color: #4f97d7; font-weight: bold; font-style: italic;">if</span> <span style="color: #bc6ec5;">(</span>readcount == <span style="color: #a45bad;">0</span><span style="color: #bc6ec5;">)</span> up<span style="color: #bc6ec5;">(</span>&amp;writer<span style="color: #bc6ec5;">)</span>;
+  up<span style="color: #bc6ec5;">(</span>&amp;mutex<span style="color: #bc6ec5;">)</span>;
+<span style="color: #4f97d7;">}</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">writer</span><span style="color: #4f97d7;">(){</span>
+ down<span style="color: #bc6ec5;">(</span>&amp;writer<span style="color: #bc6ec5;">)</span>;
+ write_shared_object<span style="color: #bc6ec5;">(</span>&amp;data<span style="color: #bc6ec5;">)</span>;
+ up<span style="color: #bc6ec5;">(</span>&amp;writer<span style="color: #bc6ec5;">)</span>;
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>Many readers can cause starvation of writers</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org191337b" class="outline-4">
+<h4 id="org191337b"><span class="section-number-4">6.4.5</span> Dining Philosophers</h4>
+<div class="outline-text-4" id="text-6-4-5">
+<ul class="org-ul">
+<li>Philosophers sitting on a round table either think or eat</li>
+<li>Philosophers do not keep forks while thinking</li>
+<li>A philosopher needs two forks to eat (left and right)</li>
+<li>A philosopher may not pick up only one fork at a time</li>
+</ul>
+<p>
+<a href="./os_slides.pdf#91">problem description</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgaf41f4c" class="outline-4">
+<h4 id="orgaf41f4c"><span class="section-number-4">6.4.6</span> Semaphores</h4>
+</div>
+</div>
+<div id="outline-container-org0162d7f" class="outline-3">
+<h3 id="org0162d7f"><span class="section-number-3">6.5</span> Critical Regions, Condition variables, Messages</h3>
+<div class="outline-text-3" id="text-6-5">
+</div>
+<div id="outline-container-orge831764" class="outline-4">
+<h4 id="orge831764"><span class="section-number-4">6.5.1</span> Critical Regions</h4>
+<div class="outline-text-4" id="text-6-5-1">
+<ul class="org-ul">
+<li>Simple programming errors with semaphores usually lead to difficult to debug synchronization errors.</li>
+<li>Idea: Let the compiler do the tedious work</li>
+</ul>
+<div class="org-src-container">
+<pre class="src src-c">shared <span style="color: #4f97d7; font-weight: bold; font-style: italic;">struct</span> <span style="color: #ce537a; font-weight: bold;">buffer</span> <span style="color: #4f97d7;">{</span>
+<span style="color: #ce537a; font-weight: bold;">item_t</span> <span style="color: #7590db;">pool</span><span style="color: #bc6ec5;">[</span>N<span style="color: #bc6ec5;">]</span>; <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">count</span>; <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">in</span>; <span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">out</span>;
+<span style="color: #4f97d7;">}</span>
+
+region <span style="color: #ce537a; font-weight: bold;">buffer</span> <span style="color: #bc6ec5; font-weight: bold;">when</span><span style="color: #4f97d7;">(</span> count &lt; N<span style="color: #4f97d7;">)</span> <span style="color: #4f97d7;">{</span>
+pool<span style="color: #bc6ec5;">[</span>in<span style="color: #bc6ec5;">]</span> = item;
+in = <span style="color: #bc6ec5;">(</span>in + <span style="color: #a45bad;">1</span><span style="color: #bc6ec5;">)</span> % N;
+count = count = <span style="color: #a45bad;">1</span>;
+<span style="color: #4f97d7;">}</span>
+
+region <span style="color: #ce537a; font-weight: bold;">buffer</span> <span style="color: #bc6ec5; font-weight: bold;">when</span> <span style="color: #4f97d7;">(</span>count &gt; <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">){</span>
+item = pool<span style="color: #bc6ec5;">[</span>out<span style="color: #bc6ec5;">]</span>;
+out = <span style="color: #bc6ec5;">(</span>out + <span style="color: #a45bad;">1</span><span style="color: #bc6ec5;">)</span> % N;
+count = count - <span style="color: #a45bad;">1</span>;
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>reduces the number of synchronization errors, does not eliminate synchronization errors</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8f8dab7" class="outline-4">
+<h4 id="org8f8dab7"><span class="section-number-4">6.5.2</span> Monitors</h4>
+<div class="outline-text-4" id="text-6-5-2">
+<ul class="org-ul">
+<li>idea: encapsulate the shared data object and the synchronization access methods into a monitor</li>
+<li>Processes can call the procedures provided by the monitor</li>
+<li>Processes can not access monitor internal data directly</li>
+<li>A monitor ensures that only one process is active in the monitor at every given point in time</li>
+<li>Monitors are special programming language constructs</li>
+<li>Compilers generate proper synchronization code</li>
+<li>Monitors were developed well before object-oriented languages became popular</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9879044" class="outline-4">
+<h4 id="org9879044"><span class="section-number-4">6.5.3</span> Conditional Variables</h4>
+<div class="outline-text-4" id="text-6-5-3">
+<ul class="org-ul">
+<li>special monitor variables that can be used to solve more complex coordination and synchronization problems</li>
+<li>Condition variables suport the two operations wait() and signal();
+<ul class="org-ul">
+<li>wait operations blocks the calling process on the condition variable c until another process invokes signal() on c.</li>
+<li>The signal() operation unblocks a process waiting on the condition variable c. The calling process must leave the monitor</li>
+</ul></li>
+<li>Condition variables are not counters. A signal() on c is ignored if no processes wait on c</li>
+<li>on wait, we need to give up mutual exclusion</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgaba5944" class="outline-4">
+<h4 id="orgaba5944"><span class="section-number-4">6.5.4</span> Messages</h4>
+<div class="outline-text-4" id="text-6-5-4">
+<ul class="org-ul">
+<li>Exchange of messages can be used for synchronization</li>
+<li>Two primitive operations:
+<ul class="org-ul">
+<li>send(destination, message)</li>
+<li>recv(source, message)</li>
+</ul></li>
+<li>Blocking message system block processes in these primitives if the peer is not ready for a rendevous</li>
+<li>Storing message systems maintain messages in special mailboxes called message queues. Processes only block if the remote mailbox is full during a send() or the local mailbox is empty during a recv()</li>
+<li>Some programming languages use message queues as the primary abstraction for thread synchroniztion(e.g., go routines and channels)</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3beb757" class="outline-4">
+<h4 id="org3beb757"><span class="section-number-4">6.5.5</span> Message systems</h4>
+<div class="outline-text-4" id="text-6-5-5">
+<ul class="org-ul">
+<li>Message systems support the synchronization of processes that do not have shared memory</li>
+<li>Message systems can be implemented in user space and without special compiler support</li>
+<li>messages are
+<ul class="org-ul">
+<li>not lost during transmission</li>
+<li>not duplicated</li>
+<li>unique in address</li>
+<li>processes do not send arbitrary messages to each other</li>
+</ul></li>
+<li>Message systems are often slower than shared memory mechanisms</li>
+<li>POSIX message queues provide synchronization between threads or processes</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9242fa7" class="outline-4">
+<h4 id="org9242fa7"><span class="section-number-4">6.5.6</span> Bounded Buffer with Messages</h4>
+<div class="outline-text-4" id="text-6-5-6">
+<ul class="org-ul">
+<li>Messages are used as tokens which control the exchange of messages</li>
+<li>Consumers initially generate and send a number of tokens to the producers</li>
+<li>Mailboxes are used as temporary storage space and must be large enough to hold all tokens / messages</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org695bdc9" class="outline-4">
+<h4 id="org695bdc9"><span class="section-number-4">6.5.7</span> Synchronization in Java</h4>
+<div class="outline-text-4" id="text-6-5-7">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #4f97d7; font-weight: bold; font-style: italic;">synchronized</span> <span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">foo</span><span style="color: #4f97d7;">()</span>  <span style="color: #4f97d7;">{</span> <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">body */</span> <span style="color: #4f97d7;">}</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">foo</span><span style="color: #4f97d7;">()</span> <span style="color: #4f97d7;">{</span> <span style="color: #4f97d7; font-weight: bold; font-style: italic;">synchronized</span><span style="color: #bc6ec5;">(</span><span style="color: #4f97d7; font-weight: bold; font-style: italic;">this</span><span style="color: #bc6ec5;">)</span> <span style="color: #bc6ec5;">{</span> <span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">body */</span> <span style="color: #bc6ec5;">}</span> <span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+<ul class="org-ul">
+<li>additional methods includes wait(), notify(), notifyAll()</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org5ee9eb9" class="outline-2">
+<h2 id="org5ee9eb9"><span class="section-number-2">7</span> Deadlocks</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-org3bfafa8" class="outline-3">
+<h3 id="org3bfafa8"><span class="section-number-3">7.1</span> Deadlocks</h3>
+<div class="outline-text-3" id="text-7-1">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #ce537a; font-weight: bold;">semaphore</span> <span style="color: #7590db;">s1</span> = <span style="color: #a45bad;">1</span>, <span style="color: #7590db;">s2</span> = <span style="color: #a45bad;">1</span>;
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">p1</span><span style="color: #4f97d7;">(){</span>
+  down<span style="color: #bc6ec5;">(</span>&amp;s1<span style="color: #bc6ec5;">)</span>;
+  down<span style="color: #bc6ec5;">(</span>&amp;s2<span style="color: #bc6ec5;">)</span>;
+  critical_section<span style="color: #bc6ec5;">()</span>;
+  up<span style="color: #bc6ec5;">(</span>&amp;s2<span style="color: #bc6ec5;">)</span>;
+  up<span style="color: #bc6ec5;">(</span>&amp;s1<span style="color: #bc6ec5;">)</span>;
+<span style="color: #4f97d7;">}</span>
+<span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #bc6ec5; font-weight: bold;">p2</span><span style="color: #4f97d7;">(){</span>
+down<span style="color: #bc6ec5;">(</span>&amp;s2<span style="color: #bc6ec5;">)</span>;
+down<span style="color: #bc6ec5;">(</span>&amp;s1<span style="color: #bc6ec5;">)</span>;
+critical_section<span style="color: #bc6ec5;">()</span>;
+up<span style="color: #bc6ec5;">(</span>&amp;s1<span style="color: #bc6ec5;">)</span>;
+up<span style="color: #bc6ec5;">(</span>&amp;s2<span style="color: #bc6ec5;">)</span>;
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org76e3164" class="outline-4">
+<h4 id="org76e3164"><span class="section-number-4">7.1.1</span> necessary deadlock conditions</h4>
+<div class="outline-text-4" id="text-7-1-1">
+<ul class="org-ul">
+<li>Mutual exclusion: Resources cannot be used simultaneously by several processes</li>
+<li>Hold and wait: Processes apply for a resource while holding another resource</li>
+<li>No preemption: Resources cannot be preempted, only the process itself can release resources</li>
+<li>Circular wait: A circular list of processes exists where every process waits for the release of a resource held by the next process</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org082136e" class="outline-3">
+<h3 id="org082136e"><span class="section-number-3">7.2</span> Resource-Allocation Graph (RAG)</h3>
+<div class="outline-text-3" id="text-7-2">
+<ul class="org-ul">
+<li>\(RAG = {V , E }\)</li>
+<li>\(V = P \cup R\)</li>
+<li>\(E = E_c \cup E_r \cup E_a\)</li>
+<li>\(P = \{ P_1, P_2, P_3, ... \}\)</li>
+<li>\(R = \{R_1, R_2, ... \}\)</li>
+<li>\(E_c={P_i \to R_j}\)</li>
+<li>\(E_r=\{P_i \to R_j\}\)</li>
+<li>\(E_a=\{R_i \to P_j\}\)</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara">crossing the boundry between user mode and kernel mode is expensive</div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara">there are overhead, and you need carefully consider it</div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="author">Author: Yiping Deng</p>
+<p class="date">Created: 2018-10-04 Thu 16:41</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

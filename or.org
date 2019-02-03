@@ -1,0 +1,5 @@
+* Info
+- course website: [[https://cnds.jacobs-university.de/courses/os-2018/][website]]
+- slides: [[file:os.pdf][slides]]
+- notes: [[file:os_notes.pdf][notes]]
+- 

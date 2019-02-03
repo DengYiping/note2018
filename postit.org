@@ -1,0 +1,8 @@
+* work
+** azure storage credentials
+- azure storage accout: aiimagestorage
+- azure storage key: YxkQTSOXZOyl2dw0+6HOKCIfVzM5l2eX/bwlcsL/AzXOaIr+q+iRgL/PzXDrYmMEq4siM0Ttt/bkV/HRj5PpAA==
+** azure custom vision credentials
+- custom vision training key(100 projects limit): a9c4bfeeb4544c8e84ab49b69952e8f0
+- personal custom vision training key(2 projects): f23fd1ebd71b4cc6b72b37ce63de1a0b
+- personal custom vision prediciton key: 44ff8f4ac5ba4b8b969ff499e9a62b42

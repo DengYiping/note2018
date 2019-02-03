@@ -1,0 +1,875 @@
+#+SETUPFILE: ~/.emacs.d/org-template/doc.setup
+* Info
+- course website: [[https://cnds.jacobs-university.de/courses/os-2018/][website]]
+- slides: [[pdf:./os_slides.pdf#20][s l ides]]
+- notes: [[pdf:./os_notes.pdf][notes]]
+** grading scheme
+- final exam 40%
+- quizzes 30%
+  + 6 quizzes, with 10 pts each
+- assignment 30%
+* Tools
+- ltrace: to trace the library call
+- strace: to trace the system call
+- ldd: to show the library used in the programs
+- insmod: to insert program into the kernel
+- /dev/null: abandon output
+- /dev/full: cannot write
+- /dev/random: random file
+- pmap: to show the memory information for a specific program
+- nm: display the symbol table
+- objdump: information about the object file
+- readelf: read the elf
+* Intro
+** system call v. library call
+- system call is expensive
+** requirement of OS
+- An operating system should *manage resources* in a way that avoids shortages or overload conditions
+- An operating system should be *efficient* and introduce little overhead
+- An operating system should be *robust against malfunctioning* application
+programs
+- Data and programs should be *protected against unauthorized access and hardware failures*
+** services for application
+- Loading of programs
+- Execution of programs (management of processes)
+- High-level input/output operations
+- Logical file systems (open(), write(), ...)
+- Control of peripheral devices
+- Interprocess communication primitives
+- Support of basic communication protocols
+- Checkpoint and restart primitives
+- ...
+** services for system operations
+- User identification and authentication
+- Access control mechanisms
+- Support for cryptographic operations and the management of keys - Control functions (e.g., forced abort of processes)
+- Testing and repair functions (e.g., file systems checks)
+- Monitoring functions (observation of system behavior)
+- Logging functions (collection of event logs)
+- Accounting functions (collection of usage statistics)
+  + useful for cloud application
+- System generation and system backup functions
+- Software management functions
+- ...
+** to trace the library call
+`ltrace`
+- our hello worlds appers to use `putc`, it is done in the compile time
+** to trace the system call
+`strace`
+- it produces write(1, "hello, world")
+** to show library used in the problem
+`ldd`
+- if you use compiler flag -static, it will produces a bigger executable.
+** printf v. write
+- use printf, it is buffered. Using the buffer we can reduce the # of system call.
+** return value of the main function
+Should be 0 if success, other for failure
+** what happened in the hello world program
+- c library: `printf()`, `puts()`, `fflush(), all this function will make a system call `write()`
+  + *user mode*
+- OS kernel: sys_write()
+  + *kernel mode* [fn::crossing the boundry between user mode and kernel mode is expensive]
+  + in the kernel, there is a table indexed by the system call number
+** kernel space
+- the equivalent of `printf` is `printk`
+- running program in the keneral is different from running program in the user space
+- to push a module into the kernel, use `sudo insmod hello/hello.ko`
+- kernel have the highest priviledge, running on Ring 0
+** types of operating system
+*** Batch Processing Operating Systems
+- Characteristics:
+  + Batch jobs are processed sequentially from a job queue
+  + Job inputs and outputs are saved in files or printed
+  + No interaction with the user during the execution of a batch program
+- Batch processing operating systems were the early form of operating systems.
+- Batch processing functions still exist today, for example to execute jobs on super computers.
+*** General Purpose Operating Systems
+- Characteristics:
+  + *Multiple programs* execute simultaneously (multi-programming, multi-tasking)
+  + *Multiple users* can use the system simultaneously (multi-user)
+  + *Processor time is shared* between the running processes (time-sharing)
+  + *Input/output devices operate concurrently* with the processors
+  + *Network support but no or very limited transparency
+- Examples:
+  + Linux, BSD, Solaris
+  + Windows, MacOS
+*** Parallel Operating Systems
+- Characteristics:
+  + Support for a very large number of tightly integrated processors(1000s)
+  + Symmetrical: Each processor has a full copy of the operating system
+  + Asymmetrical: Only one processor carries the full operating system, Other processors are operated by a small operating system stub to transfer code and tasks
+- Massively parallel systems are a niche market and hence parallel operating systems are usually very specific to the hardware design and application area.
+*** Distributed Operating Systems
+- Characteristics:
+  + Support for a medium number of loosely coupled processors
+  + Processors execute a small operating system kernel providing essential communication services
+  + Other operating system services are distributed over available processors
+  + Services can be replicated in order to improve scalability and availability
+  + Distribution of tasks and data transparent to users (single system image)
+- Examples:
+  + Amoeba (Vrije Universiteit Amsterdam)
+  + Plan 9 (Bell Labs, AT&T)
+*** Real-time Operating Systems
+- Characteristics:
+  + Predictability
+  + Logical correctness of the offered services
+  + Timeliness of the offered services
+  + Services are to be delivered not too early, not too late
+  + Operating system executes processes to meet time constraints
+- Examples:
+  + QNX
+  + VxWorks
+  + RTLinux, RTAI, Xenomai
+  + Windows CE
+*** Embedded Operating Systems
+- Characteristics:
+  + Usually real-time systems, sometimes hard real-time systems
+  + Very small memory footprint (even today!)
+  + No or limited user interaction
+  + 90-95 % of all processors are running embedded operating systems
+- Examples:
+  + Embedded Linux, Embedded BSD
+  + Symbian OS, Windows Mobile, iPhone OS, BlackBerry OS, Palm OS
+  + Cisco IOS, JunOS, IronWare, Inferno
+  + Contiki, TinyOS, RIOT
+** evolution of os
+- Vacuum Tubes: no operating system
+- Transistors: batch systems automatically process job queues
+- Integrated Circuit: Spooling (Simultaneous Peripheral Operation On Line), Multiprogramming and Time-sharing
+- VLSI: Personal computer (CP/M, MS-DOS, Windows, Mac OS, Unix), Network operating systems (Unix), Distributed operating systems (Amoeba, Mach, V)
+** Monolithic and Modular Operating Systems
+- Example: Linux
+- Modules can be platform independent
+- Easier to maintain and to develop
+- Increased reliability / robustness
+- All services are in the kernel with the same privilege level
+- May reach high efficiency Example: Linux
+** Monolithic and Layered Operating Systems
+- Easily portable, significantly easier to maintain
+- Often reduced efficiency because of the need to go through many layered interfaces
+- Rigorous implementation of the stacked virtual machine perspective
+- Services offered by the various layers are important for the overall performance
+- Example: THE (Dijkstra, 1968)
+** Virtual Machines
+- Virtualization of the hardware
+- Multiple operating systems can execute concurrently
+- Separation of multi-programming from other operating system services
+- Examples: IBM VM/370 (’79), VMware (1990s), XEN (2003)
+** micro kernel
+- bring up the driver, just implement the minimum of a kernel
+* Hardware
+** Common Computer Architecture
+- sequencer
+- ALU
+- Registers
+- buses:
+  + control bus
+  + address bus
+  + data bus
+*** CPU registers
+- Typical set of registers:
+  + Processor status register
+  + Instruction register (current instruction)
+  + Program counter (current or next instruction) - Stack pointer (top of stack)
+  + Special privileged registers
+  + Dedicated registers
+  + Universal registers
+- Privileged registers are only accessible when the processor is in privileged mode
+- Switch from non-privileged to privileged mode via traps or interrupts
+** I/O Systems and Interrupts    
+*** I/O Devices
+- I/O devices are essential for every computer
+- Typical classes of I/O devices:
+  + clocks, timers
+  + user-interface devices
+  + document I/O devices (scanner, printer, ...)   - audio and video equipment
+  + network interfaces
+  + mass storage devices
+  + sensors and actuators in control applications
+- Device drivers are often the biggest component of general purpose operating system kernels
+*** Basic I/O Programming
+- *Status driven*: the processor polls an I/O device for information
+  - Simple but inefficient use of processor cycles
+- *Interrupt driven*: the I/O device issues an interrupt when data is available or an I/O operation has been completed
+  - Program controlled: Interrupts are handled by the processor directly
+  - Program initiated: Interrupts are handled by a DMA-controller and no processing is performed by the processor (but the DMA transfer might steal some memory access
+  cycles, potentially slowing down the processor)
+  - Channel program controlled: Interrupts are handled by a dedicated channel device, which is usually itself a micro-processor
+*** Interrupts
+- Interrupts can be triggered by hardware and by software
+  - clock interrupts
+  - keyboard
+  - timer
+- Interrupt control:
+  - grouping of interrupts
+  - encoding of interrupts
+  - prioritizing interrupts
+  - enabling / disabling of interrupt sources
+- Interrupt identification:
+  - interrupt vectors, interrupt states
+- Context switching:
+  - mechanisms for CPU state saving and restoring
+*** Interrupts Servie Routines
+- minimal hardware support (supplied by the CPU)
+  - save essential CPU registers
+  - jump to the vectorized interrupt servie routine
+  - restore essential CPU register to return
+- minimal wrapper (supplied by the OS)
+  - Save remaining CPU registers
+  - Save stack-frame
+  - Execute interrupt service code
+  - Restore stack-frame
+  - Restore CPU registers
+** Memory
+*** memory size and access time
+- trade-off between memory speed and memory size
+  - register is fast, but super small
+  - L1, L2, L3 cache increases in size, decrease in speed
+  - main memory, big
+  - disk
+*** memory segments
+#+CAPTION: Different Segments in Memory
+| Segments | Description                                                                                   |
+|----------+-----------------------------------------------------------------------------------------------|
+| text     | machine instructions                                                                          |
+| data     | static variable and constants, may be further devided into initialized and uninitialized data |
+| heap     | dynamically allocated data structures                                                         |
+| stack    | automatically allocated local variables, management of function calls                         |
+- Memory used by a program is usually partitioned into different segments that serve different purposes and may have different access rights
+*** stack frame 
+- arguments pushed onto the stack in a reverse order
+- buttom is arguments for the function calls
+- then return address(instruction pointer)
+- frame pointer
+- stack locals
+*** stack smashing attack
+- unchecked boundry will lead to stack overflow
+*** caching
+- caching is A general technique to speed up memory access by introducing smaller and faster memories which keep a copy of frequently / soon needed data
+- cache hit: A memory access which can be served from the cache memory
+- cache miss: A memory access which cannot be served from the cache and requires access to slower memory
+- cache write through: A memory update which updates the cache entry as well as the slower memory cell
+- Delayed write: A memory update which updates the cache entry while the slower memory cell is updated at a later point in time
+*** Locality
+- Cache performance is relying on:
+  - Spatial locality: Nearby memory cells are likely to be accessed soon
+  - Temporal locality: Recently addressed memory cells are likely to be accessed again soon
+- Iterative languages generate linear sequences of instructions (spatial locality)
+- Functional / declarative languages extensively use recursion (temporal locality)
+- CPU time is in general often spend in small loops/iterations (spatial and temporal locality)
+- Data structures are organized in compact formats (spatial locality)
+* Processes and Thread
+** Fundamental Concepts
+*** Separation of Mechanisms and Policies
+- An important design principle is the separation of policy from mechanism.
+- Mechanisms determine how to do something.
+- Policies decide what will be done.
+- The separation of policy and mechanism is important for flexibility, especially since policies are likely to change. 
+*** User Mode 
+- the processor executes machine instructions of (user space) processes;
+- the instruction set of the processor is restricted to the so called unprivileged instruction set;
+- the set of accessible registers is restricted to the so called unprivileged register set;
+- the memory addresses used by a process are typically mapped to physical memory addresses by a memory management unit;
+- direct access to hardware components is protected by using hardware protection where possible;
+- direct access to the state of other concurrently running processes is restricted.
+*** System Mode
+- the processor executes machine instructions of the operating system kernel;
+- all instructions of the processor can be used, the so called privileged instruction set;
+- all registers are accessible, the so called privileged register set;
+- direct access to physical memory addresses and the memory address mapping tables is enabled;
+- direct access to the hardware components of the system is enableds;
+- the direct manipulation of the state of processes is possible.
+*** Entering the Operating System Kernel
+- System calls
+  - Synchronous to the running process
+  - Parameter transfer via registers, the call stack or a parameter block
+- Hardware traps
+  - Synchronous to a running process (devision by zero)
+  - Forwarded to a process by the operating system
+- Hardware interrupts
+  - Asynchronous to the running processes
+  - Call of an interrupt handler via an interrupt vector
+- Software interrupts
+  - Asynchronous to the running processes
+** Processes
+*** Characteristics
+- an instance of a program under execution
+- A process uses/owns resources (CPU, memory, file) and is charactererized by the following:
+  1. A sequence of machine instructions which determines the behavior of the running program (control flow)
+  2. The current state of the process given by the content of the processor’s registers, the contents of the stack, and the contents of the heap (internal state)
+  3. The state of other resources (e.g., open files or network connections, timer, devices) used by the running program (external state)
+- Processes are sometimes also called tasks.
+*** State Machine View of Processes
+- new: just created
+- ready: ready to running
+- running: executing
+- blocked: not ready to run, wait for resources
+- terminated: just finished, not yet removed
+*** Queueing Model View of Processes
+- Processes are enqueued if resources are not readily available or if processes wait for events
+- Dequeuing strategies have strong performance impact
+- Queueing models can be used for performance analysis
+*** Process Control Block
+- process are internally represented by a process control block (PCB)
+  - process identification
+  - process state
+  - saved registers during context switches
+  - scheduling information
+  - assigned memory regions
+  - open files or network connections
+  - accounting info (# of CPU cycles, IO operations)
+  - pointers to other PCBs
+*** Process Lists
+- PCBs are often organized in doubly-linked lists or tables
+- can be queued by pointer operations
+- run queue length of the CUP is a good load indicator
+- The system load often defined as the exponentially smoothed average of the run queue length over 1, 5 and 15 minutes
+  - usually count when there is a interrupt
+*** Process Creation
+- The fork() system call creates a new child process
+  - fork will tell you if you are child process / parent process / failed
+  - which is an exact copy of the parent process
+  - except that the result of the system call differs
+- exec() system call replaces the current process image with a new process image
+*** Process Tree
+- the first process is created when the system is initialized (init / systemd)
+- All other processes are created using fork(), which leads to a process tree
+- PCBs often contain pointers to parent PCBs
+*** Process Termination
+- Processes can terminate themself by calling exit()
+- The wait() system call allows processes to wait for the termination of a child process
+  - if you the parent exit() before the child parent, the init.d will take up the child and retrieve the number
+- Terminating processes return a numeric result code
+- shell application:
+  - first fork
+  - in the child we execute the operation
+  - and the parent wait() for the child
+*** POSIX API (fork, exec)
+#+BEGIN_SRC c
+#include <unistd.h>
+pid_t getpid(void); // never fail
+pid_t getppid(void); // always have a parent, never fail
+pid_t fork(void); // can fail
+// copying memory is relately fast. You just copy it conceptually.
+int execve(const char  *filename, char *const argv [],
+           char *const envp[]);
+extern char **environ;
+int execl(const char *path, const char *arg, ...);
+int execlp(const char *file, const char *arg, ...);
+int execle(const  char  *path,  const  char  *arg, ...,
+           char * const envp[]);
+int execv(const char *path, char *const argv[]);
+int execvp(const char *file, char *const argv[]);
+#+END_SRC
+*** POSIX API (wait, exit)
+#+BEGIN_SRC c
+#include <stdlib.h>
+void exit(int status); 
+int atexit(void (*function)(void)); // you can register a function that will be execute when exit, a handler or a hook
+#include <unistd.h>
+void _exit(int status); // not calling any at exit handler
+pid_t wait(int *status);
+pid_t waitpid(pid_t pid, int *status, int options); // wait for a process
+/*
+A state change is considered to be: the
+       child terminated; the child was stopped by a signal; or the child was
+       resumed by a signal.  In the case of a terminated child, performing a
+       wait allows the system to release the resources associated with the
+       child; if a wait is not performed, then the terminated child remains
+       in a "zombie" state (see NOTES below).
+*/
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <sys/wait.h>
+pid_t wait3(int *status, int options, struct rusage *rusage);
+pid_t wait4(pid_t pid, int *status, int options, struct rusage *rusage);
+#+END_SRC
+*** Sketch of a Command Interpreter: REPL
+#+BEGIN_SRC c
+while (1) {
+    show_prompt();
+    read_command();
+    pid = fork();
+    if (pid < 0) {
+        perror("fork");
+        continue;
+    }
+    if (pid != 0) {
+        waitpid(pid, &status, 0);
+    } else {
+        execvp(args[0], args, 0);
+        perror("execvp");
+        _exit(1);
+    }
+}
+#+END_SRC
+*** Context Switch
+- Save the *state* of the running process/thread[fn::there are overhead, and you need carefully consider it]
+- Reload the state of the next running process/thread
+- Context switch overhead is an important operating system performance metric
+- Switching processes can be expensive if memory must be reloaded
+- preferable to continue a process or thrad o the same CPU
+*** vfork()
+- the intent of vfork was to eliminate the overhead of copying the whole process image if you only want to do an exec* in the child.
+- Because exec* replaces the whole image of the child process, there is no point in copying the image of the parent.
+** Threads
+- pthread is the POSIX thread, the new standard
+*** What is threads
+- threads are individual control flows, typically within a process (or within a kernel)
+- Every thread has its own private stack (so that function calls can be managed for each thred separatedly)
+- Multiple threads share the same address space and other resources
+  - Fast communication between threads
+  - Fast context switching between threads (no switching of memory images)
+  - Often used for very scalable server programs
+  - Multiple CPUs can be used by a single process
+  - Threads require synchronization (see later)
+- Some operating systems provide thread support in the kernel while others implement threads in user space
+*** POSIX thread API
+ #+BEGIN_SRC c
+ #include <pthread.h>
+ typedef ... pthread_t;
+ typedef ... pthread_attr_t;
+ int pthread_create(pthread_t *thread,
+                    pthread_attr_t *attr,
+                    void * (*start) (void *), //execution point
+                    void *arg); // a simple arguments
+ void pthread_exit(void *retval); // The pthread_exit() function terminates the calling thread and returns a value via retval
+ int pthread_cancel(pthread_t thread);
+ int pthread_join(pthread_t thread, void **retvalp); // block current thread until the target thread terminates
+ int pthread_cleanup_push(void (*func)(void *), void *arg)
+ int pthread_cleanup_pop(int execute)
+ #+END_SRC
+*** process and thread in Linux
+- Linux internally treats processes and threads as so called tasks
+- Linux distinguishes three different types of tasks:
+  1. idle tasks (also called idle threads)
+  2. kernel tasks (also called kernel threads)
+  3. user tasks
+- Tasks are in one of the states running, interruptible, uninterruptible, stopped, zombie, or dead
+- A special clone() system call is used to create processes and threads
+*** process and thread in Linux
+- Linux tasks (processes) are represented by a struct task struct defined in <linux/sched.h>
+- Tasks are organized in a circular, doubly-linked list with an additional hashtable, hashed by process id (pid)
+- Non-modifying access to the task list requires the usage of the tasklist lock for READ
+- Modifying access to the task list requires the usage the tasklist lock for WRITE
+- System calls are identified by a number
+- The sys call table contains pointers to functions implementing the system calls
+* Synchronization
+** Why threads?
+- utilize the multi-core usage
+- if there is little computation and throtted by IO operations, multithreaded program might be slower.
+- non-blocking IO might be faster on a single thread
+** Race Conditions and Critical Sections
+*** Race conditions
+A race condition exists if the result produced by concurrent processes (or threads),
+which access and manipulate shared resources (variables),
+depends unexpectedly on the order of the execution of the processes (or threads).
+- Protection against race conditions is a very important issue within operating system kernels, but equally well in
+many application programs
+- Protection against race condition is difficult to test
+- High-level programming constructs move the generation of correct low-level protection into the compiler
+*** Bounded Buffer Program
+- Two processes share a common fixed-size buffer
+- The producer process puts data into the buffer
+- The consumer process reads data out of the buffer
+- The producer must wait if the buffer is full
+- The consumer must wait if the buffer is empty
+#+BEGIN_SRC c
+  void producer(){
+    produce(&item);
+    while (count == N) sleep(1);
+    buffer[in] = item;
+    in=(in+1)%N;
+    count = count + 1;
+  }
+  void consumer() {
+    while (count == 0) sleep(1); 
+    item = buffer[out]; 
+    out=(out+1)%N;
+    count = count - 1;
+    consume(item);
+  }
+#+END_SRC
+It leads to race condition. The value will read first, then change the value, and then assign the value back.
+In between the read and write, other threads might change the value, leading to undefined behavior of the program.
+- Every situation, in which multiple processes (threads) manipulate shared resources, can lead to race conditions
+- Synchronization mechanisms are always needed to coordinate access to shared resources
+*** Critical Sections
+- a critical section is a segment of code that can only be executed by one process at a time
+- The execution of critical sections by multiple processes is mutually exclusive in time
+- Entry and exit sections must protect critical sections
+*** Critical Section Problem
+- to design a protocol that the processes can use to cooperate
+- A solution must satisfy the following requirements
+  - mutual exclusion: No two processes may be simultaneously inside the same critical section.
+  - Progress: No process outside its critical sections may block other processes.
+  - Bounded-Waiting: No process should have to wait forever to enter its critical section.
+- General solutions are not allowed to make assumptions about execution speeds or the number of CPUs present in a system.
+** Sychronization Mechanisms
+*** Disabling Interrupts
+- The simplest solution is to disable all interrupts during the critical section so that nothing can interrupt the critical section
+#+BEGIN_SRC c
+disable_interrupts();
+critical_section();
+enable_interrupts();
+#+END_SRC
+- Can usually not be used in user-space
+- Problematic on systems with multiple processors
+- Fails if interrupts are needed in the critical section
+- Very efficient and sometimes used in some special cases
+*** Strict Alternation
+- Lets assume just two processes which share a variable called turn which holds the values 0 and 1
+- Ensures mutual exclusion
+- Can be extended to handle alternation between N processes
+- Does not satisfy the progress requirement since the solution enforces strict alternation
+*** Peterson’s Algorithm
+- Lets assume two processes i and j sharing a variable turn (which holds a process identifier) and a boolean array interested, indexed by process identifiers
+- Modifications of turn (and interested) are protected by a loop to handle concurrency issues
+- Algorithm satisfies mutual exclusion, progress and bounded-waiting requirements and can be extended to handle N processes
+*** Spin-Locks
+- So called spin-locks are locks which cause the processor to spin while waiting for the lock
+- Spin-locks are often used to synchronize multi-processor systems with shared memory
+- Spin-locks require atomic test-and-set-lock machine instructions on shared memory cells
+- Reentrant locks do not harm if you already hold a lock
+*** Critique of Spin-Locks
+- Busy waiting potentially wastes processor cycles
+- Busy waiting can lead to priority inversion
+  - Consider processes with high and low priority
+  - Processes with high priority are preferred over processes with lower priority by the scheduler
+  - Once a low priority process enters a critical section, processes with high priority will be slowed down more or less to the low priority
+  - Depending on the scheduler, complete starvation is possible
+- Find alternatives which do not require busy waiting
+** Semaphores
+*** What is Semaphores?
+- A semaphore is a protected integer variable which can only be manipulated by the atomic operations up() and down()
+#+BEGIN_SRC c
+down(s) {
+  s = s - 1;
+  if (s < 0) queue_this_process_and_block();
+}
+up(s) {
+  s = s + 1;
+  if (s <= 0) dequeue_and_wakeup_process();
+}
+#+END_SRC
+- Dijkstra called the operations P() and V(), other popular names are wait() and signal()
+*** Critical Sections and Semaphores
+#+BEGIN_SRC c
+semaphore mutex = 1;
+uncritical_section();
+down(&mutex);
+critical_section();
+up(&mutex);
+uncritical_section();
+#+END_SRC
+- Rule of thumb: Every access to a shared data object must be protected by a mutex semaphore for the shared data object as shown above
+- However, some synchronization problems require more creative usage
+*** Bounded Buffer with Semaphores
+#+BEGIN_SRC c
+  const int N;
+  shared item_t buffer[N];
+  semaphore mutex = 1, empty = N, full = 0;
+  void producer(){
+    produce(&item);
+    down(&empty);
+    down(&mutex); // it matters
+    buffer[in] = item;
+    in = (in + 1) % N;
+    up(&mutex);
+    up(&full); // doesn't matter
+  }
+
+  void consumer(){
+    down(&full);
+    down(&mutex); // it matters
+    item = buffer[out];
+    out = (out + 1) % N;
+    up(&mutex);
+    up(&empty);
+    consume(&item); // doesn't matter
+  }
+#+END_SRC
+*** Readers / Writers Problem
+- A data object is to be shared among several concurrent processes
+- Multiple processes (the readers) should be able to read the shared data object simultaneously
+- Processes that modify the shared data object (the writers) may only do so if no other process (reader or writer) accesses the shared data object
+- Several variations exist, mainly distinguishing whether either reader or writers gain preferred access
+  - Starvation can occur in many solutions and is not taken into account here
+#+BEGIN_SRC c
+  shared object data;
+  shared int readcount = 0;
+  semaphore mutex = 1, writer = 1;
+  void writer(){
+    down(&mutex);
+    readcount++;
+    if( readcount == 1) down(&writer);
+    up(&mutex);
+    read_shared_obj(&data);
+    down(&mutex);
+    readcount = readcount - 1;
+    if (readcount == 0) up(&writer);
+    up(&mutex);
+  }
+  void writer(){
+   down(&writer);
+   write_shared_object(&data);
+   up(&writer);
+  }
+#+END_SRC
+- Many readers can cause starvation of writers
+*** Dining Philosophers
+- Philosophers sitting on a round table either think or eat
+- Philosophers do not keep forks while thinking
+- A philosopher needs two forks to eat (left and right)
+- A philosopher may not pick up only one fork at a time
+[[pdf:./os_slides.pdf#91][problem description]]
+*** Semaphores
+** Critical Regions, Condition variables, Messages
+*** Critical Regions
+- Simple programming errors with semaphores usually lead to difficult to debug synchronization errors.
+- Idea: Let the compiler do the tedious work
+#+BEGIN_SRC c
+  shared struct buffer {
+  item_t pool[N]; int count; int in; int out;
+  }
+
+  region buffer when( count < N) {
+  pool[in] = item;
+  in = (in + 1) % N;
+  count = count = 1;
+  }
+
+  region buffer when (count > 0){
+  item = pool[out];
+  out = (out + 1) % N;
+  count = count - 1;
+  }
+#+END_SRC
+- reduces the number of synchronization errors, does not eliminate synchronization errors
+*** Monitors
+- idea: encapsulate the shared data object and the synchronization access methods into a monitor
+- Processes can call the procedures provided by the monitor
+- Processes can not access monitor internal data directly
+- A monitor ensures that only one process is active in the monitor at every given point in time
+- Monitors are special programming language constructs
+- Compilers generate proper synchronization code
+- Monitors were developed well before object-oriented languages became popular
+*** Conditional Variables
+- special monitor variables that can be used to solve more complex coordination and synchronization problems
+- Condition variables suport the two operations wait() and signal();
+  - wait operations blocks the calling process on the condition variable c until another process invokes signal() on c.
+  - The signal() operation unblocks a process waiting on the condition variable c. The calling process must leave the monitor
+- Condition variables are not counters. A signal() on c is ignored if no processes wait on c
+- on wait, we need to give up mutual exclusion
+*** Messages
+- Exchange of messages can be used for synchronization
+- Two primitive operations:
+  - send(destination, message)
+  - recv(source, message)
+- Blocking message system block processes in these primitives if the peer is not ready for a rendevous
+- Storing message systems maintain messages in special mailboxes called message queues. Processes only block if the remote mailbox is full during a send() or the local mailbox is empty during a recv()
+- Some programming languages use message queues as the primary abstraction for thread synchroniztion(e.g., go routines and channels)
+*** Message systems
+- Message systems support the synchronization of processes that do not have shared memory
+- Message systems can be implemented in user space and without special compiler support
+- messages are
+  - not lost during transmission
+  - not duplicated
+  - unique in address
+  - processes do not send arbitrary messages to each other
+- Message systems are often slower than shared memory mechanisms
+- POSIX message queues provide synchronization between threads or processes
+*** Bounded Buffer with Messages
+- Messages are used as tokens which control the exchange of messages
+- Consumers initially generate and send a number of tokens to the producers
+- Mailboxes are used as temporary storage space and must be large enough to hold all tokens / messages
+*** Synchronization in Java
+#+BEGIN_SRC java
+synchronized void foo()  { /* body */ }
+void foo() { synchronized(this) { /* body */ } }
+#+END_SRC
+- additional methods includes wait(), notify(), notifyAll()
+* Deadlocks
+** Deadlocks
+#+BEGIN_SRC c
+  semaphore s1 = 1, s2 = 1;
+  void p1(){
+    down(&s1);
+    down(&s2);
+    critical_section();
+    up(&s2);
+    up(&s1);
+  }
+  void p2(){
+  down(&s2);
+  down(&s1);
+  critical_section();
+  up(&s1);
+  up(&s2);
+  }
+#+END_SRC
+*** necessary deadlock conditions
+- Mutual exclusion: Resources cannot be used simultaneously by several processes
+- Hold and wait: Processes apply for a resource while holding another resource
+- No preemption: Resources cannot be preempted, only the process itself can release resources
+- Circular wait: A circular list of processes exists where every process waits for the release of a resource held by the next process
+** Resource-Allocation Graph (RAG)
+- $RAG = {V , E }$
+- $V = P \cup R$
+- $E = E_c \cup E_r \cup E_a$
+- $P = \{ P_1, P_2, P_3, ... \}$
+- $R = \{R_1, R_2, ... \}$
+- $E_c={P_i \to R_j}$
+- $E_r=\{P_i \to R_j\}$
+- $E_a=\{R_i \to P_j\}$
+*** deadlock in RAG
+- a single instance resource appear in a circle
+** Deadlock strategies
+*** prevention
+- Ensure that at least one of the necessary conditions cannot hold
+- Prevent mutual exclusion: Some resources are intrinsically non-sharable
+- Prevent hold and wait: Low resource utilization and starvation possible
+- Prevent no preemption: Preemption can not be applied to some resources such as printers or tape drives
+- Prevent circular wait: Leads to low resource utilization and starvation if the imposed order does not match process requirements
+
+Prevention is not feasible in the general case
+*** avoidance
+- Definitions:
+  - A state is safe if the system can allocate resources to each process (up to its claimed maximum) and still avoid a deadlock
+  - A state is unsafe if the system cannot prevent processes from requesting resources such that a deadlock occurs
+- Assumption: For every process, the maximum resource claims are known a priori.
+- Idea: Only grant resource requests that can not lead to a deadlock situation
+**** Banker's Algorithm
+[[pdf:./os_slides.pdf#141][slides for Banker's algorithm]]
+*** deadlock detection
+- Idea:
+  - assign resources without checking for unsafe states
+  - periodically run an algorithm to detect deadlocks
+  - once a deadlock has been detected, use an algorithm to recover from the deadlock
+- Recovery:
+  - Abort one or more deadlocked processes
+  - Preempt resources until the deadlock cycle is broken
+- Issues:
+  - Criterias for selecting a victim?
+  - How to avoid starvation?
+* Scheduling
+** CPU Scheduling
+- A /scheduler/ selects from among the processes in memory that are ready to execute, and allocates CPU to one of them.
+- /Fairness/: Every process gets a fair amount of CPU time
+- /Efficiency/: CPUs should be busy whenever there is a process ready to run
+- /Response Time/: The response time for interactive applications should be minimized
+- /Wait Time/: The time it takes to execute a given process should be minimized
+- /Throughput/: The number of processes completed per time interval should be maximized
+*** Preemptive Scheduling
+- A preemptive scheduler can interrupt a running process and assign the CPU to another process
+- A non-preemptive scheduler waits for the process to give up the CPU once the CPU has been assigned to the process
+- Non-preemptive schedulers cannot guarantee fairness
+- Preemptive schedulers are harder to design
+- Preemptive schedulers might preempt the CPU at times where the preemption is costly (e.g., in the middle of a critical section)
+*** Deterministic vs. Probabilistic
+- A deterministic scheduler knows the execution times of the processes and optimizes the CPU assignment to optimize system behavior (e.g., maximize throughput)
+- A probabilistic scheduler describes process behavior with certain probability distributions (e.g., process arrival rate distribution) and optimizes the overall system behavior based on these probabilistic assumptions
+- Deterministic schedulers are relatively easy to analyze
+- Finding optimal schedules is a complex problem
+- Probabilistic schedulers must be analyzed using stochastic models (queuing models)
+*** Deterministic Scheduling
+[[pdf:./os_slides.pdf#158][deterministic scheduling]]
+** CPU Scheduling Strategies
+- FCFS(first come first serve)
+- Longest Processing Time First
+- Shortest Job First
+- Shortest Remaining Time First
+- Round Robin
+- Round Robin Variations
+  - Use separate queues for each processor
+  - Use a short-term queue and a long-term queue
+  - Different time slices for different types of processes
+  - Adapt time slices dynamically
+- Multilevel Queue Scheduling
+- Real-time Scheduling
+  - Hard real-time: guaranteed amount of time
+  - Soft real-time: critical tasks always receive priority over less critical tasks
+- Earliest Deadline First
+** Linux Scheduler System Calls
+* Linking
+** Linker
+*** C compilation process
+1. preprocessor -> expanded C code (gcc -E hello.c)
+2. C compiler -> assemble code (gcc -S hello.c)
+3. assembler -> object code (gcc -c hello.c)
+4. linker -> executable (gcc hello.c) [fn::Compiling C source code is traditionally a four-stage process.Modern compilers often integrate stages for efficiency reasons.]
+*** Reasons for using a Linker
+- Modularity
+  - Programs can be written as a collection of small files
+  - building a collection of easily reuseable functions
+- Efficiency
+  - Separate compilation of a sbuset of small files saves time on large projects
+  - Smaller executables by linking only functions that are actually used
+*** What does a Linker do?
+- Symbol resolution
+  - Programs define and reference symbols
+  - Symbol definitions and references are stored in object files
+  - Linker associates each symbol reference with exactly one symbol definition
+- Relocation
+  - Merge separate code and data sections into combined sections
+  - Relocate symbols from relative locations to their final absolute locations
+  - Update all references to these symbols to reflect their new positions
+*** Object code File Types
+- Relocatable object files
+  - Contains code and data in a form that can be combined with other relocatable
+- Executable object files
+  - Contains code and data in a form that can be loaded directly into memory
+- Shared object files (.so)
+  - Special type of relocatable object file that can be loaded into memory and linked dynamically at either load time or run-time
+*** Executable and Linkable Format
+- Standard unified binary format for all object files
+- ELF header provides basic information (word size, endianess, machine architecture,...)
+- Program header table describes zero or more segments used at runtime
+- Section header table provides information about zero or more sections
+- Separate sections for .text, .rodata, .data, .bss, .symtab, .rel.text, .rel.data, .debug and many more
+- The /readelf/ tool can be used to read ELF format
+- The tool objdump can process ELF formatted object files
+*** Linker Symbols
+- Global symbols: Symbols defined by a module that can be referenced by other modules
+- External symbols: Global symbols that are referenced by a module but defined by some other module
+- Local symbols: Symbols that are defined and referenced exclusively by a single module
+- Tools:
+  - The traditional tool nm displays the (symbol table) of object files in a traditional format
+  - The newer tool objdump -t does the same for ELF object files
+*** Strong and Weak Symbols and Linker Rules
+- Strong symbols: functions and initialized global variables
+- Weak symbols: uninitialized global variables
+- Linker Rules:
+  - Rule 1: don't link if multiple strong symbols
+  - Rule 2: given a strong and multiple weak symbols, pick the strong
+  - Rule 3: if all weak, random
+** Libraries
+*** Static Libraries
+- Collect related relocatable object files into a single file with an index(called an archive)
+- Enhance linker so that it tries to resolve external references by looking for symbols in one more more archives
+- If an archive member file resolves a reference, link the archive member file into the executable (which may produce additional references)
+- The archive format allows for incremental updates
+- Example: ar -rs libfoo.a foo.o bar.o
+*** Shared Libraries
+- Static linking duplicates library code by copying it into executables
+- Bug fixes in libraries require to re-link all executables
+- Solution: Delay the linking until program start and then link against the most recent matching versions of the required libraries
+- At traditional link time, an executable file is prepared for dynamic linking (i.e., information is stored which shared libraries are needed) while the final linking takes place when an executable is loaded into memory
+- First nice side effect: Library code can be stored in memory shared by multiple processes
+- Second nice side effect: Programs can load additional code dynamically while the program is running
+- Caveat: Loading untrusted libraries can lead to real surprises
+** Interpositioning
+- Intercept library calls for fun and profit
+- Debugging: tracing memory allocations / leaks
+- Profiling: study typical function arguments
+- Sandboxing: emulate a restricted view on a filesystem
+- Hardening: simulate failures to test program robustness
+- Privacy: add encryption into I/O calls
+- Hacking: give a program an illusion to run in a different context
+- Spying: oops
+*** Compile time
+[[pdf:./os_slides.pdf#189][compile time]]
+*** Link-time
+[[pdf:./os_slides.pdf#190][link time]]
+*** Load-time
+[[pdf:./os_slides.pdf#191][load time]]

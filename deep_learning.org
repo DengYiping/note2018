@@ -1,0 +1,54 @@
+#+STARTUP: latexpreview
+* Introduction
+** Math background
+** Feed-forward Neural Network and Backpropagation
+Feed-forward neural network is the fundation of other network architectures.
+
+Let's first define several useful symbols. \sigma is representing the non-linear function
+called activation function.
+For a fixed network architecture, the weight at layer /l/, denoted as W_l, defines a function \(f_w: X_l \to X_{l + 1}\), where
+X_l denotes the activation at layer /l/. For example, given a neural network with 3 layers ( 1 input layer, 1 hidden layer
+and 1 output layer), it is defined by 2 weight matrix W_1 and W_2. Given a input activation \(X_1 \in \mathbb{R}^m \), adding the bias term
+leads to a input of dimension /m + 1/. Thus, \(W_1 \in \mathbb{R}^{k \times (m + 1)} \). Similarily, we can conclude that
+\(W_2 \in \mathbb{R}^{n \times (k + 1)} \) 
+
+Now, let's consider the loss function.  
+1. Stochastic update loss: \( E = \frac{1}{2} \| z - t\|^2\)
+2. Batch update loss: \( E = \frac{1}{2} \sum_{i \in Batch}\| z_i - t_i\|^2 \)
+
+t and t_i are ground truth of such classification.
+
+Gradient decent's formula is
+ \[W_i = W_i - \alpha \frac{\partial E}{\partial W_i}\]
+ (note: in the implementation of this algorithm, all of these weight has to be update simutaniously)
+
+Given \(X_3 = \sigma(W_2 \cdot X_2) \),
+let's first come up with the partial derivative of /E/ with respect to W_2.
+\begin{align*}
+  \frac{\partial E}{\partial W_2} &= (X_3 - t) \frac{\partial X_3}{\partial W_2}\\
+                   &= (X_3 - t) \circ \sigma'(W_2 X_2) \cdot \frac{\partial W_2 X_2}{\partial W_2}\\
+                   &= \delta_2 \cdot X_2^\intercal \\
+\end{align*}
+
+Where \circ is the Hadamard product and with
+\[\delta_2 = (X_3 - t) \circ \sigma'(W_2 X_2)  = \frac{\partial E}{\partial W_2 X_2} \]
+
+Also, let's derive the partial derivative with respect to W_1
+
+\[ \frac{\partial E}{\partial W_1} = \frac{\partial E}{\partial W_2 X_2} \cdot \frac{\partial W_2 X_2}{\partial W_1} = W_2^\intercal \delta_2 \frac{\partial X_2}{\partial W_1} \]
+Then, we have
+\begin{align*}
+\frac{\partial E}{\partial W_1} &=  W_2^\intercal \delta_2 \frac{\partial X_2}{\partial W_1}\\
+                 &= W_2^\intercal \delta_2 \circ \sigma'(W_1 X_1) X_1^\intercal\\
+                 &= \delta_1 X_1
+\end{align*}
+
+where $\delta_1 =  W_2^\intercal \delta_2 \frac{\partial X_2}{\partial W_1}$
+
+In general, if we start our network with X_0 instead of X_1, we have
+\[\delta_L = (X_L - t) \circ \sigma'(W_L X_{L - 1}) \]
+and 
+\[ \delta_i = (X_{i + 1}^\intercal \delta_{i + 1} \circ \sigma'(W_i X_{i- 1}) \]
+
+This leads to the following
+\[\frac{\partial E}{\partial W_i} = \delta_i X_{i - 1}^\intercal \]

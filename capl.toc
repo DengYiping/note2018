@@ -1,0 +1,28 @@
+\contentsline {section}{\numberline {1}Info}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}books:}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}goals:}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}grading scheme:}{3}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}homework:}{3}{subsection.1.4}
+\contentsline {subsubsection}{\numberline {1.4.1}grading criteria}{3}{subsubsection.1.4.1}
+\contentsline {subsection}{\numberline {1.5}tutorials:}{3}{subsection.1.5}
+\contentsline {section}{\numberline {2}Introduction}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}history}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}processor}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}numerical representation and numerical system}{4}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}analog v. digital}{4}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}digital number systems}{4}{subsubsection.2.3.2}
+\contentsline {subsubsection}{\numberline {2.3.3}digital circuit v. logic circuit}{5}{subsubsection.2.3.3}
+\contentsline {subsubsection}{\numberline {2.3.4}parallel v. serial}{5}{subsubsection.2.3.4}
+\contentsline {subsubsection}{\numberline {2.3.5}memory}{5}{subsubsection.2.3.5}
+\contentsline {section}{\numberline {3}Digital system}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}Conversion}{5}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Binary system}{5}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Hexadecimal Number system}{6}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Binary-coded decimal(BCD)}{6}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.4}Bytes, Nibbles and Words}{6}{subsubsection.3.1.4}
+\contentsline {subsubsection}{\numberline {3.1.5}ASCII code}{6}{subsubsection.3.1.5}
+\contentsline {subsection}{\numberline {3.2}Logic Functions}{7}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}boolean constants and variables}{7}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}to generate truth table}{7}{subsubsection.3.2.2}
+\contentsline {subsection}{\numberline {3.3}Logic Circuits}{8}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Minimization of Logic Expression: rules}{8}{subsubsection.3.3.1}

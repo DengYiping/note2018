@@ -1,0 +1,83 @@
+* Presentation
+** Logistics:
+Tuesday 8:15 - 9:30
+Friday 9:45 - 11:00
+** Grading 
+- Homework 60%
+- Final exam 20%
+- Midterm exam 20%
+** Work
+- Regular quizzes
+- Homework/ project -> pre-requisite to take the final exam
+ + won't accept any homework if it is late.
+** Health excuses
+Not accepting health excuses.
+* Introduction to Computer Vision
+The goal of computer vision to bridging the gap between pixels and meaning.
+** what is vision?
+- humans: -> images -> sensing devices -> iterpreting device -> interpretations
+- computers: -> images -> cameras -> computers -> interpretation
+** what information to extract?
+- Metric 3D information
+- Semantics
+** what is color?
+- the result of ityeraction between physical light in the environment and our visual system.
+- A psychological property of our visual experiences when we look at objects and lights, not a physical property of those objects or lights.
+** two types of light sensitive receptors
+- cones: cone-shaped, less sensitive, operate in high light, color vision
+- Rods: rod-shaped, highly snesitive, operate at night, gray-scala vision
+** trichromacy
+- three numbers seem to be sufficient for encoding color
+- dates back to 18th centuary.
+- don't have to be always RGB
+** RGB v. HSV
+- RGB: component
+- HSV: hue, saturation, value
+** white balance:
+- it is the process of removing unrealistic color casts, so that objects which appear white in person are rendered white in you photo.
+- whne the white balance is not correct, the picture will have n unnatural color "cast".
+*** Film cameras:
+different types of film or different filteres for different illumination condition
+*** digital cmeras
+- automatic white balance
+- custom white balancing using a reference objects
+*** Von Kries adaptation
+- multiply each channel by a gain factor
+- A more general approach would correspond to an arbitrary 3x3 matrix
+*** Best way: gray card
+- take a pciture of a neutral object (gray/white)
+- deduct the weight of each channel, use the inverse of the weight to calibrate each channel.
+- without gray card, we need to guess
+  + using the average of the image, assume it is gray
+*** Brightest pixel assumption (non-saturated)
+- highlights usually have the color of the light source
+- Use weights inversely proportional to the values of the pixel
+*** Gamut mapping
+* Scale-invariant
+* Detectors
+** Harris detector
+*** mathematics
+\[ E(u, v) = \sum_{x, y} w(x, y) [I(x + u, y + v) - I(x, y)]\]
+This equation is computational expensive, so we can use the first order Taylor
+\begin{align*}
+&\sum_{x, y} [I(x + u, y + v) - I(x, y)] \\
+&= \sum_{x, y} [I(x,v) + u I_x + v I_y - I(x, y)] \\
+&= u^2 I_x^2  2 u v I_x I_y + v^2 I_y^2 \\
+&= [u v] (\sum \begin{bmatrix} I_x^2 & I_x I_y \\ I_x I_y & I_y^2 \end{bmatrix}) [u v]'
+\end{align*}
+
+Thus, we can have a bilinear approximation
+\[ M = (\sum w(x,y) \begin{bmatrix} I_x^2 & I_x I_y \\ I_x I_y & I_y^2 \end{bmatrix})  \]
+and 
+\[ E(u, v) \approx [u, v] M [u, v]' \]
+*** cornerness 
+We look at the two eigen value of the $M$ matrix. With two big eigenvalues,
+it means it is a corner. If one is significantly bigger than the other, it is
+a edge. If both small, it is plain images.
+We write
+\[ R = det(M) - k \cdot tr(M)^2 \], where $det(M) = \lambda_1 \lambda_2$,
+$tr(M) = \lambda_1 + \lambda_2$
+** Scala-invariant detector
+http://www.cse.iitm.ac.in/~vplab/courses/CV_DIP/PDF/Feature.pdf
+*** Difference of the Gaussian(band-filter on image)
+*** SIFT
